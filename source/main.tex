@@ -1,0 +1,45 @@
+\documentclass[
+    corpo=12pt,
+    twoside,
+    oldstyle,
+    tipotesi=magistrale,
+    greek,
+    evenboxes,
+]{toptesi}
+
+\usepackage[utf8]{inputenc}  % codifica d'entrata
+\usepackage[T1]{fontenc}     % codifica dei font
+\usepackage{lmodern}         % scelta dei font
+\usepackage{hyperref}
+
+\hypersetup{
+    pdfpagemode={UseOutlines},
+    bookmarksopen,
+    pdfstartview={FitH},
+    colorlinks,
+    linkcolor={blue},
+    citecolor={blue},
+    urlcolor={blue}
+}
+
+\interlinea{1.5}
+
+\begin{document}
+    \english
+    \errorcontextlines=9
+
+    \include{title_page}
+
+    \begin{abstract}
+        todo\\
+        brief description of the thesis
+    \end{abstract}
+
+    \acknowledgements
+    todo
+
+
+    \allcontents
+    \include{body}
+
+\end{document}

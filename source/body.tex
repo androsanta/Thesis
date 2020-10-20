@@ -1,0 +1,131 @@
+\begin{mainmatter}
+
+    \begin{chapter}{Introduction}
+        \label{chap:intro}
+
+        \section{Serverless}
+        todo: what is it? description of the framework and description of a plain serverless
+        project
+
+        \subsection{Advantages}
+        todo
+
+        \subsection{Disadvantages}
+        todo
+
+        \section{The idea behind Restlessness}
+        todo\\
+        Idea behind it. General description. Which problems it aims to solve, advantages (user experience,
+        scalability, coding efficiency) with respect to a plain serverless codebase,
+        disadvantages. Why it is Open Source
+
+        \section{Related Works}
+        todo??
+        Are there other similar framework? What are the differences? Why use restlessness instead?
+
+        \section{Tools}
+        Development tools/main software used with brief description: git/github, circle-ci, serverless framework,
+        aws, jetbrain's products, slack, npm, typescript etc
+
+    \end{chapter}
+
+
+    \begin{chapter}{Restlessness}
+        \label{chap:restlessness}
+
+        Detailed description of the project's structure with description of main components/packages
+        (maybe a class diagram could show easily the structure)
+
+        micro-services structure of the project created by the framework
+        handling of environment files
+
+        \section{Project created by the framework}
+        todo\\
+        description of a project created usingthe framework
+
+        \section{Core}
+        todo
+
+        \section{Cli}
+        todo
+
+        \section{Backend}
+        todo
+
+        \section{Frontend}
+        todo
+
+        \section{Testing}
+        todo\\
+        handling of tests for the framework itself and for the project created by the
+        framework
+
+    \end{chapter}
+
+
+    \begin{chapter}{Restlessness Extensions}
+        the framework has been designed with extensibility in mind
+
+        some auth and dao extensions are already provided
+
+        \section{Authentication}
+        auth-jwt and auth-cognito packages
+
+        \section{Database Access Object}
+        dao-mongo package (plus plugin to create a database proxy)
+
+        \subsection{Database Proxy}
+        todo\\
+        show data about number of connections until crash in normal
+        situation and when using the proxy
+
+    \end{chapter}
+
+
+    \begin{chapter}{Development}
+        \label{chap:development}
+
+        \section{Github}
+        Useful tools provided by GitHub (projects to handle tasks)
+        Roadmap, development process/flow (issues, pull requests...)
+
+        \section{Continuous Integration}
+        circle-ci
+
+    \end{chapter}
+
+
+    \begin{chapter}{Application}
+        \label{chap:application}
+
+        Application to real projects with emerged problems
+
+        \section{FGA covid school api}
+        brief description of the project\\
+        Problems arised by using restlessness (mainly the need for a database proxy
+        and a solution for cold start, i.e. warmup plugin)
+
+
+        \section{Gbsweb Claranominis api}
+        brief description of the project\\
+        Problems arised by using restlessness (mainly necessary migration to micro-services
+        structure)
+
+    \end{chapter}
+
+
+    \begin{chapter}{Deployment}
+        \label{chap:deployment}
+
+        \section{Aws}
+        todo\\
+        detailed description of what resources are created when deploying
+
+    \end{chapter}
+
+
+    \begin{chapter}{Conclusions}
+        todo??
+    \end{chapter}
+
+\end{mainmatter}
