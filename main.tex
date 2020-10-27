@@ -28,7 +28,7 @@
     \english
     \errorcontextlines=9
 
-    \include{title_page}
+    \include{source/title}
 
     \begin{abstract}
         todo\\
@@ -38,8 +38,20 @@
     \acknowledgements
     todo
 
-
     \allcontents
-    \include{body}
+
+    \begin{mainmatter}
+        \input{source/intro.tex}
+        \input{source/restlessness.tex}
+        \input{source/extensions.tex}
+        \input{source/development.tex}
+        \input{source/application.tex}
+        \input{source/deployment.tex}
+
+        \begin{chapter}{Conclusions}
+            todo??
+        \end{chapter}
+
+    \end{mainmatter}
 
 \end{document}
