@@ -174,26 +174,26 @@
     % organizzati sotto una singola app e diverse app sotto un unica organization
 
     \begin{lstlisting}[caption=Simple serverless.yml file, label={lst:simple_sls_yml}]
-    service: users
-    provider:
-        name: aws
-        runtime: nodejs12.x
-    functions:
-        usersCreate:
-            handler: handler.usersCreate
-            events:
-                - http: post users/create
+service: users
+provider:
+    name: aws
+    runtime: nodejs12.x
+functions:
+    usersCreate:
+        handler: handler.usersCreate
+        events:
+            - http: post users/create
     \end{lstlisting}
 
     \begin{lstlisting}[caption=Simple handler function, label={lst:handler_fun}]
-    async function usersCreate(event, context) {
-        const user = {
-            name: 'sample_name',
-            surname: 'sample_surname'
-        }
-        await mockDb.createUser(user)
-        return user
+async function usersCreate(event, context) {
+    const user = {
+        name: 'sample_name',
+        surname: 'sample_surname'
     }
+    await mockDb.createUser(user)
+    return user
+}
     \end{lstlisting}
 
     % @todo parlare anche di event e context, cosa contengono etc..
@@ -217,7 +217,7 @@
     % @todo dire anche qualcosa sul fatto che il deploy si possa fare su diversi ambienti
     % show also deploy output
     \begin{lstlisting}[caption=Deploy command, label={lst:sls_deploy}]
-        $ serverless deploy
+$ serverless deploy
     \end{lstlisting}
     The deploy command creates the necessary aws resources, in this case they are:
     a lambda function corresponding to the usersCreate function and an api gateway to
@@ -229,7 +229,7 @@
     specifying the identifier of the function used in the serverless.yml file, as shown
     on listing \ref{lst:sls_invoke}
     \begin{lstlisting}[caption=Invoke command, label={lst:sls_invoke}]
-    $ serverless invoke -f usersCreate
+$ serverless invoke -f usersCreate
     \end{lstlisting}
 
     The development and deploy process shown for a service with a single function
