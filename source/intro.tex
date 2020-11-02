@@ -11,7 +11,7 @@
     \begin{figure}
         \centering
         \includegraphics[height=4cm]{source/images/saas-paas-iaas-cloud-pyramid.png}
-        \caption{IaaS, PaaS, Saas pyramid}
+        \caption{IaaS, PaaS, SaaS pyramid}
         \label{fig:cloud_computing_pyramid}
     \end{figure}
 
@@ -52,7 +52,7 @@
     \begin{figure}
         \centering
         \includegraphics[width=\linewidth]{source/images/saas-paas-iaas-diagram.png}
-        \caption{IaaS, PaaS, Saas diagram}
+        \caption{IaaS, PaaS, SaaS diagram}
         \label{fig:cloud_computing_architectures}
     \end{figure}
 
@@ -101,7 +101,7 @@
     limit is the cloud provider availability.
 
     An implementation of the serverless paradigm is the cloud model named Function
-    as a Service (Faas), which allows developers to write and update pieces of code
+    as a Service (FaaS), which allows developers to write and update pieces of code
     on the fly, typically a single function.
     Such code is then executed in response to an event, usually an api call, but other
     options are possible, so it executed regardless of the events, and this lead to
@@ -128,6 +128,7 @@
     azure function and cloud function respectively in 2016.
 
     \section{Serverless Framework}
+    \label{sec:serverless_framework}
     Shortly after the release of the service Aws lambda functions, has been introduced,
     in 2015, the Serverless framework, with the main objective of making development,
     deploy and troubleshoot serverless applications with the least possible overhead.
@@ -163,34 +164,61 @@
 
     A service is described by a file, located at the root directory of the project, and
     composed in the format \href{https://yaml.org/}{Yaml} or Json.
-    Below is a simple serverless.yml file % todo (\ref{fig:...})
+    Below is a simple serverless.yml file (listing \ref{lst:simple_sls_yml})
     , it defines the service users, which
     contains just a function, responsible of creating a user. The handler field specify
     the path to the function code, in this case the framework will search for a handler.js file,
-    exporting a usersCreate function, as show on % todo \ref{fig:...}.
+    exporting a usersCreate function, as show on listing \ref{lst:handler_fun}.
 
-    % @TODO insert also provider etc
-    % insert code of a sample serverless.yml file
-    % service: users
-    % functions:
-    %     usersCreate:
-    %         handler: handler.usersCreate
-    %         events:
-    %             - http: post users/create
+    % @TODO parlare un pò di più della dashboard, dire come i vari servizi possono essere
+    % organizzati sotto una singola app e diverse app sotto un unica organization
 
-    % insert code of a sample handler
-    % async function usersCreate(event, context) {
-    %     const user = { name: 'sample_name', surname: 'sample_surname' }
-    %     await mockDb.createUser(user)
-    %     return user
-    % }
+    \begin{lstlisting}[caption=Simple serverless.yml file, label={lst:simple_sls_yml}]
+    service: users
+    provider:
+        name: aws
+        runtime: nodejs12.x
+    functions:
+        usersCreate:
+            handler: handler.usersCreate
+            events:
+                - http: post users/create
+    \end{lstlisting}
+
+    \begin{lstlisting}[caption=Simple handler function, label={lst:handler_fun}]
+    async function usersCreate(event, context) {
+        const user = {
+            name: 'sample_name',
+            surname: 'sample_surname'
+        }
+        await mockDb.createUser(user)
+        return user
+    }
+    \end{lstlisting}
+
+    % @todo parlare anche di event e context, cosa contengono etc..
+
+    \begin{figure}
+        \caption{Simple Serverless project structure}
+        \label{fig:sls_project_structure}
+        \begin{minipage}{\linewidth}
+            \dirtree{%
+                .1 ./.
+                .2 handler.js.
+                .2 serverless.yml.
+            }
+        \end{minipage}
+    \end{figure}
 
     Serverless is flexible and does not force a fixed structure of the project, that
     task is up to the developer.
-    Defined that structure, the service can be deployed using the Serverless CLI, as
-    show in % \ref{fig:...}
-    % command: $ serverless deploy
+    Defined that structure, the service can be deployed using the Serverless CLI, on
+    the chosen provider, as shown on listing \ref{lst:sls_deploy}.
+    % @todo dire anche qualcosa sul fatto che il deploy si possa fare su diversi ambienti
     % show also deploy output
+    \begin{lstlisting}[caption=Deploy command, label={lst:sls_deploy}]
+        $ serverless deploy
+    \end{lstlisting}
     The deploy command creates the necessary aws resources, in this case they are:
     a lambda function corresponding to the usersCreate function and an api gateway to
     handle http requests.
@@ -198,8 +226,12 @@
     url returned by the CLI, as shown in % \ref{fig:...} figure of deploy log
     specifying the resource path /users/create.
     It is possible to invoke online functions also directly from the CLI,
-    specifying the identifier of the function used in the serverless.yml file, as shown in % \ref{} or code
-    % command: $ serverless invoke -f usersCreate
+    specifying the identifier of the function used in the serverless.yml file, as shown
+    on listing \ref{lst:sls_invoke}
+    \begin{lstlisting}[caption=Invoke command, label={lst:sls_invoke}]
+    $ serverless invoke -f usersCreate
+    \end{lstlisting}
+
     The development and deploy process shown for a service with a single function
     remains the same as the service complexity grows, in particular it is possible to
     modify and deploy a single function at a time, since each function has its own
@@ -255,7 +287,6 @@
         \item Creation of a new project, through the CLI, based on the typescript
             language and with a standard structure.
         \item A local Web Interface that allow creating and managing project resources,
-            % todo al posto delle parentesi usare i riferimenti
             functions, with their associated events, and models.
         \item The creation of a standard unit testing structure for each function,
             and based on the \href{https://www.npmjs.com/package/jest}{jest} library.

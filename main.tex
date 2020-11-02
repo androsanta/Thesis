@@ -1,4 +1,4 @@
-\documentclass[
+\documentclass[%
     corpo=12pt,
     twoside,
     oldstyle,
@@ -11,8 +11,15 @@
 \usepackage[T1]{fontenc}     % codifica dei font
 \usepackage{lmodern}         % scelta dei font
 \usepackage{hyperref}
+\usepackage{dirtree}
+\usepackage{listings}
+% \usepackage{packages/tslistings} @todo set style
 
-\hypersetup{
+\lstset{%
+    frame=single
+}
+
+\hypersetup{%
     pdfpagemode={UseOutlines},
     bookmarksopen,
     pdfstartview={FitH},
