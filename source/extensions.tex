@@ -1,17 +1,109 @@
 \begin{chapter}{Restlessness Extensions}
-    the framework has been designed with extensibility in mind
+    \label{chap:extensions}
 
-    some auth and dao extensions are already provided
+    The framework has been designed from the beginning with the possibility of
+    extending its functionalities using external packages.
+    To achieve this, has been defined an AddOnPackage class, containing the
+    following lifecycle hooks:
+    \begin{itemize}
+        \item postInstall: executed after the addon package has been installed.
+            Here it's possible to perform initialization operations.
+        \item postEnvCreated: executed after a new environment has been created,
+            so the addon can add its own environment variables if needed.
+        \item beforeEndpoint: executed before the corresponding function of an
+            endpoint. Here it's possible to perform resource initialization,
+            for example opening a database connection.
+        \item beforeSchedule: as for endpoints, it's executed before the
+            corresponding function of a schedule.
+    \end{itemize}
+
+    In addition to this class Restlessness provides also more specific classes,
+    for authentication and data access.
 
     \section{Authentication}
     auth-jwt and auth-cognito packages
 
-    \section{Database Access Object}
-    dao-mongo package (plus plugin to create a database proxy)
+    \subsection{Usage example}
+    @todo
+
+    \section{Data Access Object}
+    To simplify the creation of a Data Access Object, Restlessness provides the
+    abstract class DaoPackage (listing \ref{lst:daopackage}), which extends the
+    AddOnPackage class previously defined.
+
+    \begin{lstlisting}[caption=DaoPackage class definition, label={lst:daopackage}]
+abstract class DaoPackage extends AddOnPackage {
+    abstract modelTemplate(modelName: string): string
+}
+    \end{lstlisting}
+
+    In addition to the previously defined hooks, classes implementing DaoPackage,
+    should implement also the modelTemplate method, and a base dao class, to which
+    we will refer to as DaoBase. This latter class should provides the main Dao
+    functionalities, while the code template returned by modelTemplate should define
+    a class that extends the DaoBase one.
+
+    Restlessness already provides a Dao package for the popular non relational
+    database \href{https://www.mongodb.com/}{mongodb}, and it's available on the
+    npm platform as '@restlessness/dao-mongo'.
+    That package exports two main components, an implementation of the DaoPackage
+    class, and a MongoBase class, the DaoBase class containing the main Dao
+    functionalities for CRUD operations, as shown on listing \ref{lst:mongobase}.
+
+    \begin{lstlisting}[caption=MongoBase class definition, label={lst:mongobase}]
+export default class MongoBase {
+    _id: ObjectId
+    created: Date
+    lastEdit: Date
+
+    static get collectionName()
+    static get dao(): MongoDao
+    async getById(_id: ObjectId): Promise<boolean>
+    static async getList<T>(
+      query: QuerySelector<T> = {},
+      limit: number = 10,
+      skip: number = 0,
+      sortBy: string = null,
+      asc: boolean = true
+    ): Promise<T[]>
+    static async getCounter<T>(
+        query: QuerySelector<T> = {}): Promise<number>
+    async save()
+    async update()
+    async patch(fields: any): Promise<boolean>
+    async remove<T>(): Promise<boolean>
+    static async createIndex(
+        keys, options): Promise<boolean>
+}
+    \end{lstlisting}
+
+    Users of the package can then create models based on the MongoBase class through
+    the Restlessness Web Interface (\ref{subsec:models}).
+    The creation of that model is made possible by implementing the DaoPackage.modelTemplate
+    method, as shown on (@todo ref model template)
+
+    \begin{lstlisting}
+const modelTemplate = (name: string): string => `
+import {
+    MongoBase, ObjectId
+} from '@restlessness/dao-mongo';
+
+export default class ${name} extends MongoBase {
+    ['constructor']: typeof ${name}
+
+    static get collectionName() {
+        return '${pluralize(name, 2).toLowerCase()}';
+    }
+};
+`;
+    \end{lstlisting}
 
     \subsection{Database Proxy}
     todo\\
     show data about number of connections until crash in normal
     situation and when using the proxy
+
+    \subsection{Usage example}
+    @todo
 
 \end{chapter}
