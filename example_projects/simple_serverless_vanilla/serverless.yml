@@ -1,0 +1,11 @@
+service: users
+
+provider:
+    name: aws
+    runtime: nodejs12.x
+
+functions:
+    usersCreate:
+        handler: handler.usersCreate
+        events:
+            - http: post users/create

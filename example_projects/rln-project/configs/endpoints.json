@@ -1,0 +1,12 @@
+[
+  {
+    "id": "postUsers",
+    "safeFunctionName": "postUsers",
+    "route": "/users",
+    "method": "post",
+    "authorizerId": null,
+    "daoIds": null,
+    "warmupEnabled": false,
+    "serviceName": "users"
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "name": "clean",
+    "description": "",
+    "rateNumber": 5,
+    "rateUnit": "day",
+    "daoIds": [],
+    "serviceName": "users",
+    "enabled": true,
+    "id": "clean",
+    "safeFunctionName": "clean"
+  }
+]

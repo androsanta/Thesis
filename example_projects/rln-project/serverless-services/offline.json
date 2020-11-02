@@ -1,0 +1,50 @@
+{
+  "service": "rln-project-offline",
+  "provider": {
+    "name": "aws",
+    "runtime": "nodejs12.x"
+  },
+  "plugins": [
+    "serverless-offline",
+    "serverless-plugin-warmup"
+  ],
+  "functions": {
+    "postUsers": {
+      "handler": "dist/exporter.postUsers",
+      "events": [
+        {
+          "http": {
+            "path": "users",
+            "method": "post",
+            "cors": true,
+            "authorizer": null
+          }
+        }
+      ],
+      "warmup": {
+        "enabled": false
+      }
+    },
+    "clean": {
+      "handler": "dist/schedulesExporter.clean",
+      "warmup": {
+        "enabled": false
+      },
+      "events": [
+        {
+          "schedule": {
+            "name": "clean",
+            "description": "",
+            "enabled": true
+          }
+        }
+      ]
+    }
+  },
+  "custom": {
+    "warmup": {
+      "prewarm": true,
+      "enabled": true
+    }
+  }
+}

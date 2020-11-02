@@ -1,0 +1,66 @@
+{
+  "service": "rln-project-users",
+  "provider": {
+    "name": "aws",
+    "runtime": "nodejs12.x",
+    "stage": "${opt:stage, 'dev'}",
+    "apiGateway": {
+      "restApiId": {
+        "Fn::ImportValue": "rln-project-SharedGW-restApiId-${self:provider.stage}"
+      },
+      "restApiRootResourceId": {
+        "Fn::ImportValue": "rln-project-SharedGW-rootResourceId-${self:provider.stage}"
+      }
+    },
+    "region": "eu-west-2"
+  },
+  "package": {
+    "exclude": [
+      ".serverless-outputs/**"
+    ]
+  },
+  "plugins": [
+    "serverless-plugin-warmup"
+  ],
+  "functions": {
+    "postUsers": {
+      "handler": "dist/exporter.postUsers",
+      "events": [
+        {
+          "http": {
+            "path": "users",
+            "method": "post",
+            "cors": true,
+            "authorizer": null
+          }
+        }
+      ],
+      "warmup": {
+        "enabled": false
+      }
+    },
+    "clean": {
+      "handler": "dist/schedulesExporter.clean",
+      "warmup": {
+        "enabled": false
+      },
+      "events": [
+        {
+          "schedule": {
+            "name": "clean",
+            "description": "",
+            "enabled": true
+          }
+        }
+      ]
+    }
+  },
+  "custom": {
+    "warmup": {
+      "prewarm": true,
+      "enabled": true
+    }
+  },
+  "app": "thesis-sample-app",
+  "org": "andreas-org"
+}

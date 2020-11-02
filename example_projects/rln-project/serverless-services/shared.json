@@ -1,0 +1,47 @@
+{
+  "service": "rln-project-shared",
+  "provider": {
+    "name": "aws",
+    "runtime": "nodejs12.x",
+    "stage": "${opt:stage, 'dev'}",
+    "region": "eu-west-2"
+  },
+  "package": {
+    "exclude": [
+      ".serverless-outputs/**"
+    ]
+  },
+  "resources": {
+    "Resources": {
+      "SharedGW": {
+        "Type": "AWS::ApiGateway::RestApi",
+        "Properties": {
+          "Name": "rln-project-${self:provider.stage}"
+        }
+      }
+    },
+    "Outputs": {
+      "apiGatewayRestApiId": {
+        "Value": {
+          "Ref": "SharedGW"
+        },
+        "Export": {
+          "Name": "rln-project-SharedGW-restApiId-${self:provider.stage}"
+        }
+      },
+      "apiGatewayRestApiRootResourceId": {
+        "Value": {
+          "Fn::GetAtt": [
+            "SharedGW",
+            "RootResourceId"
+          ]
+        },
+        "Export": {
+          "Name": "rln-project-SharedGW-rootResourceId-${self:provider.stage}"
+        }
+      }
+    }
+  },
+  "app": "thesis-sample-app",
+  "org": "andreas-org"
+}
