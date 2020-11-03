@@ -1,7 +1,132 @@
 \begin{chapter}{Application}
     \label{chap:application}
 
-    Application to real projects with emerged problems
+    During its development process, the Restlessness framework has been tested on
+    real deployed applications, and this has been fundamental as it helped finding
+    bugs and critical issues at an early stage.
+    The main issues have emerged during the implementation of the backend for the
+    project Spazio alla scuola, a platform thought by the Fondazione Agnelli.
+
+    The foundation is a non-profit, independent institute for social science research,
+    born in 1966 in Turin, by the lawyer Agnelli, on the occasion of the centenary
+    of the birth of the founder of Fiat, Senator Giovanni Agnelli.
+    Its purpose is to work in support of scientific research and to disseminate
+    knowledge of the conditions on which Italy's progress depends.
+
+    \section{Spazio alla scuola}
+    The project Spazio alla scuola aims to provide a concrete support to school
+    leaders for lecture resumption on September 2020, given the health situation on the
+    country due to the SARS-CoV-2 pandemic.
+    The platform offer tools to verify capacity of classroom and other school spaces,
+    to plan classrooms flows and staggering, in compliance with the distancing measures.
+    The platform is provided as a free service and is available at the address
+    \url{www.spazioallascuola.it}.
+
+    \subsection{Cold start}
+    The first encountered problem has been Cold start, a new term in the serverless
+    development that denotes the situation in which a serverless function is not
+    active yet, so the platform must perform some resources initialization, with the
+    main one being\footnote{Relatively to the Aws platform}:
+
+    \begin{itemize}
+        \item Code: the project's code is uploaded in a zip archive, so it needs to
+            be downloaded and extracted.
+        \item Extensions: aws allow associate extensions to a lambda function, to
+            integrate it with custom monitoring, security or other tools.
+        \item Runtime: bootstrap operation for the chosen runtime environment,
+            it is also possible to provides a custom runtime if needed.
+        \item Function: code written by the developer, it can perform some resource
+            initialization, such as creating a database connection.
+    \end{itemize}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{source/images/aws-lambda-lifecycle.png}
+        \caption{Aws Lambda lifecycle}
+        \label{fig:aws_lambda_lifecycle}
+    \end{figure}
+
+    The Cold start refers exactly to this Init phase and represent an overhead to the
+    function execution, however once this phase is completed the function is ready,
+    and subsequent invocations will not suffer from it. Then after some times without
+    receiving any events, usually in the order of 5 to 20 minutes, the platform performs
+    the Shutdown phase, so any following event causes the process to start again from
+    the Init phase.
+    For the majority of runtimes the duration of the Cold start varies in the order
+    of tenths of a second, as shown on figure \ref{fig:cold_start_duration}. The provided
+    numbers vary also based on the memory allocated for the function and the size of the
+    provided code package.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{source/images/cold-start-duration.png}
+        \caption{Cold start duration for different runtimes}
+        \label{fig:cold_start_duration}
+    \end{figure}
+
+    % In the particular case of the project Spazio alla scuola the Cold start duration
+    % was experienced in the order of 1.5 seconds, caused
+    % @todo check values from the serverless dashboard, write then the main components:
+    % mongodb initialization and connection (about 500ms), third party libraries
+    % (about 200ms) and Restlessness overhead (about 50ms, but check again)
+
+    One of the approaches to mitigate the effect of the Cold start proposed by the
+    Serverless community has been the plugin named
+    \href{https://www.npmjs.com/package/serverless-plugin-warmup}{serverless-plugin-warmup}.
+    The plugin creates a scheduled function programmed to invoke the other defined functions,
+    forcing the platform to keep an active container for each function.
+    This way the Cold start effect remains present, but the end user of the api does
+    not experience it.
+
+    Has been decided to make this plugin an integral part of the Restlessness framework,
+    granting out of the box support for it. From the Web Interface is possible to
+    enabled or disable the warmup on the single endpoint, since not all functions may
+    need it.
+    By including the warmup plugin into the framework the effect of Cold start has
+    been mitigated, however it introduced another type of issue.
+    \begin{figure}
+        \centering
+        % \includegraphics[width=\linewidth]{source/images/} @todo
+        \caption{Endpoint resource with warmup enabled}
+        \label{fig:wi_endpoint_warmup}
+    \end{figure}
+
+    \subsection{Database proxy}
+    The project Spazio alla scuola rely on the popular non relational database
+    \href{https://www.mongodb.com}{mongodb}. As stated previously, each function
+    run in its own runtime, independently from the others, consequently each function
+    requiring database access needs to open a non shared connection.
+    So the number of active connections can become quite high, depending on the number
+    of active functions, furthermore using mongodb, the connection remains active for
+    a certain amount of time even after the function has been shutdown.
+    This leads to a high number of active connections, which is a problem, not only
+    in terms of resources used, since each connection requires memory usage on the
+    database, but also because mongodb has a limit of 500 concurrent connections,
+    and once the threshold is exceeded the application experiences random errors when
+    performing database operations.
+    \begin{figure}
+        \centering
+        % \includegraphics[width=\linewidth]{source/images/} @todo
+        \caption{Mongodb connections reaching the 500 threshold}
+    \end{figure}
+
+    Although the problem has been amplified by the introduction of the warmup plugin
+    integration, it remains a critical issue for application that rely on the high
+    scalability of the serverless platform.
+    To address this problem on its relational databases, Aws rely on the usage of a
+    proxy between the functions and the database. Exploiting the concept of a proxy,
+    has been decided to approach the problem in the same way, since a solution for
+    for the mongo database does not exist at the moment.
+    Restlessness already provides the package @restlessness/dao-mongo, as described on
+    section \ref{sec:data_access_object}, defining an abstraction level over the
+    mongodb driver, so it was possible to include a proxy without changing the
+    exposed methods for the users.
+    Has been decided to develop an open source plugin, named
+    \href{https://github.com/getapper/serverless-mongo-proxy}{serverless-mongo-proxy},
+    to provide the proxy functionality, independently from the Restlessness framework,
+    as shown on \ref{subsec:database_proxy}.
+    The dao-mongo package then uses the plugin internally, providing an effective
+    solution to the presented problem.
 
     \section{FGA covid school api}
     brief description of the project\\

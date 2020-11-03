@@ -80,9 +80,9 @@ export default class MongoBase {
     Users of the package can then create models based on the MongoBase class through
     the Restlessness Web Interface (\ref{subsec:models}).
     The creation of that model is made possible by implementing the DaoPackage.modelTemplate
-    method, as shown on (@todo ref model template)
+    method, as shown on listing \ref{lst:model_template}.
 
-    \begin{lstlisting}
+    \begin{lstlisting}[caption=modelTemplate function definition, label={lst:model_template}]
 const modelTemplate = (name: string): string => `
 import {
     MongoBase, ObjectId
