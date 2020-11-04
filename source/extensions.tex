@@ -45,6 +45,7 @@ abstract class DaoPackage extends AddOnPackage {
     functionalities, while the code template returned by modelTemplate should define
     a class that extends the DaoBase one.
 
+    \subsection{Dao for mongodb}
     Restlessness already provides a Dao package for the popular non relational
     database \href{https://www.mongodb.com/}{mongodb}, and it's available on the
     npm platform as '@restlessness/dao-mongo'.
@@ -100,7 +101,7 @@ export default class ${name} extends MongoBase {
 `;
     \end{lstlisting}
 
-    \subsection{Database Proxy}
+    \subsubsection{Database Proxy}
     \label{subsec:database_proxy}
     The MongoBase class uses the MongoDao class internally to perform database
     operations. The latter class, at the early stage of Restlessness development,
