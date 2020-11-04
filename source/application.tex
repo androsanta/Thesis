@@ -128,15 +128,30 @@
     The dao-mongo package then uses the plugin internally, providing an effective
     solution to the presented problem.
 
-    \section{FGA covid school api}
-    brief description of the project\\
-    Problems arised by using restlessness (mainly the need for a database proxy
-    and a solution for cold start, i.e. warmup plugin)
+    \subsection{Micro services}
+    During the deployment of an application on the Aws platform a number of resources
+    are created for each function, to provides services such as logging, api gateway
+    for http events, permissions and others functionalities. The Aws platform has a
+    threshold of maximum 200 resources definable for each service
+    (\ref{subsec:sls_disadvantage}), and since for each function there are about 10
+    resources associated, it follows that each service can define about 20 functions.
+    Since the serverless paradigm proposes a Micro services oriented approach this
+    limitation actually force developers to compose their application as a set of
+    low complexity services.
+    So the next step in the Restlessness framework development has been to switch
+    between the management of a single service, to a multitude of services, under
+    the same Restlessness project (\ref{sec:rln_project_creation}). With this
+    approach has been possible to split the functions of the project Spazio alla
+    scuola into multiple services, obtaining a more fine grained separation between
+    its logic components.
 
+    \bigbreak
+    In conclusion the choice of using serverless, combined with the Restlessness
+    framework for the backend api of Spazio alla scuola, brought the desired benefits
+    in terms of ease of development, after the proper framework
+    improvements described previously.
+    At its peak, the api service has managed 500 thousand requests, demonstrating
+    the advantage of the natural scalability of the serverless approach.
 
-    \section{Gbsweb Claranominis api}
-    brief description of the project\\
-    Problems arised by using restlessness (mainly necessary migration to micro-services
-    structure)
 
 \end{chapter}
