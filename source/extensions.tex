@@ -20,11 +20,11 @@
     In addition to this class Restlessness provides also more specific classes,
     for authentication and data access.
 
-    \section{Authentication}
-    auth-jwt and auth-cognito packages
+    % \section{Authentication}
+    % auth-jwt and auth-cognito packages
 
-    \subsection{Usage example}
-    @todo
+    % \subsection{Usage example}
+    % @todo
 
     \section{Data Access Object}
     \label{sec:data_access_object}
@@ -49,7 +49,7 @@ abstract class DaoPackage extends AddOnPackage {
     database \href{https://www.mongodb.com/}{mongodb}, and it's available on the
     npm platform as '@restlessness/dao-mongo'.
     That package exports two main components, an implementation of the DaoPackage
-    class, and a MongoBase class, the DaoBase class containing the main Dao
+    class, and a MongoBase class, the base class containing the main Dao
     functionalities for CRUD operations, as shown on listing \ref{lst:mongobase}.
 
     \begin{lstlisting}[caption=MongoBase class definition, label={lst:mongobase}]
@@ -102,10 +102,38 @@ export default class ${name} extends MongoBase {
 
     \subsection{Database Proxy}
     \label{subsec:database_proxy}
-    todo\\
-    show data about number of connections until crash in normal
-    situation and when using the proxy
+    The MongoBase class uses the MongoDao class internally to perform database
+    operations. The latter class, at the early stage of Restlessness development,
+    offered an abstraction layer over the official
+    \href{https://www.npmjs.com/package/mongodb}{mongodb driver} for Node.js,
+    effectively using the driver internally.
+    As described on chapter \ref{chap:application}, this approach showed its
+    drawbacks in the context of a serverless application, so the next approach has
+    been to exploit the concept of Database Proxy.
+    The main idea is to have a serverless function, the proxy, with the task of
+    performing all database access, on behalf of all other serverless functions.
+    Another advantage of Serverless is indeed the possibility to invoke a function
+    from another one, but this comes at the cost of a doubled Cold start (
+    \ref{subsec:cold_start}), resulting in a performance degradation for some requests.
+    However the solution provided on \ref{subsec:cold_start} is particularly useful in
+    this case because enabling the warmup plugin on the proxy function, avoids the
+    costs of function initialization and also database connection, making it possible
+    to enable warmup only on a small group of functions, so the overall performance
+    improves or stays the same.
     % @todo figure to illustrate (database <-> proxy <-> function) structure
+
+    To implement this structure has been developed a serverless plugin, named
+    \href{https://www.npmjs.com/package/serverless-mongo-proxy}{serverless-mongo-proxy},
+    and usable independently of the Restlessness framework.
+    The plugin automatically creates the serverless proxy function in the specified
+    service, which in the case of Restlessness is the shared one, so all services
+    can exploit the advantages of using a proxy.
+    Since all informations exchanged between serverless functions must be serialized,
+    the plugin used the \href{http://bsonspec.org/}{bson} encoding, to obtain consistent
+    representation for data types such as dates and regular expressions.
+
+    The MongoDao class can then invoke the proxy function internally, without having
+    to keep a connection open.
 
     \subsection{Usage example}
     @todo
