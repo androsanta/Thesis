@@ -36,31 +36,22 @@
     \errorcontextlines=9
 
     \include{source/title}
-
-    \begin{abstract}
-        todo\\
-        brief description of the thesis
-    \end{abstract}
-
-    \acknowledgements
-    todo
+    \include{source/abstract}
+    \include{source/acknowledgements}
 
     \renewcommand{\baselinestretch}{1.1}\normalsize
     \allcontents
     \renewcommand{\baselinestretch}{1.5}\normalsize
 
     \begin{mainmatter}
-        \input{source/intro.tex}
-        \input{source/restlessness.tex}
-        \input{source/extensions.tex}
-        \input{source/development.tex}
-        \input{source/application.tex}
-        \input{source/deployment.tex}
-
-        \begin{chapter}{Conclusions}
-            todo??
-        \end{chapter}
-
+        \input{source/intro}
+        \input{source/restlessness}
+        \input{source/extensions}
+        \input{source/development}
+        \input{source/application}
+        \input{source/deployment}
+        \input{source/conclusions}
+        \input{source/biblio}
     \end{mainmatter}
 
 \end{document}
