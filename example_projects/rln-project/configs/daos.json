@@ -1,1 +1,7 @@
-[]
+[
+  {
+    "id": "dao-mongo",
+    "name": "Mongo DAO",
+    "package": "@restlessness/dao-mongo"
+  }
+]

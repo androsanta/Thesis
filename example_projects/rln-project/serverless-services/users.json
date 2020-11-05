@@ -12,7 +12,16 @@
         "Fn::ImportValue": "rln-project-SharedGW-rootResourceId-${self:provider.stage}"
       }
     },
-    "region": "eu-west-2"
+    "region": "eu-west-2",
+    "iamRoleStatements": [
+      {
+        "Effect": "Allow",
+        "Resource": "*",
+        "Action": [
+          "lambda:InvokeFunction"
+        ]
+      }
+    ]
   },
   "package": {
     "exclude": [
@@ -36,7 +45,7 @@
         }
       ],
       "warmup": {
-        "enabled": false
+        "enabled": true
       }
     },
     "clean": {

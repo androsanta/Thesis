@@ -2,11 +2,21 @@
   "service": "rln-project-offline",
   "provider": {
     "name": "aws",
-    "runtime": "nodejs12.x"
+    "runtime": "nodejs12.x",
+    "iamRoleStatements": [
+      {
+        "Effect": "Allow",
+        "Resource": "*",
+        "Action": [
+          "lambda:InvokeFunction"
+        ]
+      }
+    ]
   },
   "plugins": [
     "serverless-offline",
-    "serverless-plugin-warmup"
+    "serverless-plugin-warmup",
+    "serverless-mongo-proxy"
   ],
   "functions": {
     "postUsers": {
@@ -22,7 +32,7 @@
         }
       ],
       "warmup": {
-        "enabled": false
+        "enabled": true
       }
     },
     "clean": {

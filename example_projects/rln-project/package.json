@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@restlessness/core": "0.5.16",
+    "@restlessness/dao-mongo": "^0.5.3",
     "module-alias": "2.2.0",
+    "serverless-mongo-proxy": "0.1.4",
     "yup": "0.29.3"
   },
   "devDependencies": {

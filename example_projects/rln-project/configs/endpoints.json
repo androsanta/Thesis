@@ -4,9 +4,8 @@
     "safeFunctionName": "postUsers",
     "route": "/users",
     "method": "post",
-    "authorizerId": null,
-    "daoIds": null,
-    "warmupEnabled": false,
+    "daoIds": [],
+    "warmupEnabled": true,
     "serviceName": "users"
   }
 ]

@@ -4,7 +4,16 @@
     "name": "aws",
     "runtime": "nodejs12.x",
     "stage": "${opt:stage, 'dev'}",
-    "region": "eu-west-2"
+    "region": "eu-west-2",
+    "iamRoleStatements": [
+      {
+        "Effect": "Allow",
+        "Resource": "*",
+        "Action": [
+          "lambda:InvokeFunction"
+        ]
+      }
+    ]
   },
   "package": {
     "exclude": [
@@ -43,5 +52,8 @@
     }
   },
   "app": "thesis-sample-app",
-  "org": "andreas-org"
+  "org": "andreas-org",
+  "plugins": [
+    "serverless-mongo-proxy"
+  ]
 }
