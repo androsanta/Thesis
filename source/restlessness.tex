@@ -97,10 +97,11 @@ $ restlessness new rln_project
     named shared and offline, and they are required for the framework to work.
 
     The shared service will contains all shared resources that can be used by all
-    the other services. This is the case for the api gateway (@todo ref aws api
-    gateway description) because, since it is responsible for handling http requests,
-    it is convenient to have a single url for all services, rather than one for
-    each service. Other shared resources may be simple functions or authorizers.
+    % (@todo ref aws api gateway description)
+    the other services. This is the case for the api gateway because, since it is
+    responsible for handling http requests, it is convenient to have a single url
+    for all services, rather than one for each service. Other shared resources may
+    be simple functions or authorizers.
     The offline service is required to handle local development, as it contains the
     resource definition of all services.
     % @todo parlare in maniera più approfondita del fatto che il servizio offline
@@ -141,7 +142,6 @@ $ restlessness new rln_project
     name in input, as it takes care of loading the corresponding environment variables
     from the folder .envs, as explained on section \ref{sec:env_vars}.
 
-    % @todo show also command output
     \begin{lstlisting}[caption=Dev command, label={lst:rln_command_dev}]
 $ restlessness dev locale
     \end{lstlisting}
@@ -156,7 +156,7 @@ $ restlessness dev locale
 
     \begin{figure}
         \centering
-        % @todo \includegraphics[width=\linewidth]{source/images/}
+        \includegraphics[width=\linewidth]{source/images/rln-web-interface.png}
         \caption{Restlessness Web Interface}
         \label{fig:rln_web_interface}
     \end{figure}
@@ -183,7 +183,7 @@ $ restlessness dev locale
 
     \begin{figure}
         \centering
-        % @todo \includegraphics[width=\linewidth]{source/images/}
+        \includegraphics[width=\linewidth]{source/images/rln-wi-create-endpoint.png}
         \caption{Creation of and endpoint}
         \label{fig:wi_create_endpoint}
     \end{figure}
@@ -322,10 +322,9 @@ import handler from './handler';
 export default ScheduleHandler.bind(this, handler, 'clean');
     \end{lstlisting}
 
-    \subsection{Models}
-    \label{subsec:models}
-    @todo\\
-
+    % \subsection{Models}
+    % \label{subsec:models}
+    % @todo\\
 
     % parlare di come rln salva le info sulle varie risorse nei vari file
     % di configurazione
@@ -345,15 +344,15 @@ export default ScheduleHandler.bind(this, handler, 'clean');
     % qui magari mettere un class diagram
 
     \section{Test}
-    A test template is also provided when creating a new endpoint (@todo ref), and
-    it is based on the popular testing library \href{https://jestjs.io/}{jest}.
+    A test template is also provided when creating a new endpoint, and it is based
+    on the popular testing library \href{https://jestjs.io/}{jest}.
     % @todo talk more about the library
     In addition to the jest library, Restlessness provides also a TestHandler class,
     which makes testing the endpoint straightforward.
     Inside the beforeAll function it performs initialization operations, such as
     loading the correct environment variables, while the function invokeLambda
     executes the endpoint function providing automatically the event and context
-    objects (@todo ref), simulating this way an http event.
+    objects, simulating this way an http event. %  (@todo ref event and contex, aws chap)
     The fact that serverless is based on function makes possible using a simple
     testing structure as the one presented, as it's not necessary for example to
     actually starts an http server to test the endpoints.
@@ -381,8 +380,8 @@ afterAll(async done => {
 });
     \end{lstlisting}
 
-    \section{Api documentation}
-    @todo swagger generated documentation
+    % \section{Api documentation}
+    % @todo swagger generated documentation
 
     \section{Deploy}
     The Serverless Framework already provides a command for the deploy operation,
@@ -428,9 +427,8 @@ $ restlessness deploy --env production users
     Has been decided to handle this information with different environment files,
     storing environment variables.
     At project initialization the framework creates 4 different environments: locale,
-    test, staging and production. Each environment has an associated type and
-    stage (@todo ref). The type represent the purpose of that environment, below
-    are the available types:
+    test, staging and production. Each environment has an associated type and stage.
+    The type represent the purpose of that environment, beloware the available types:
     \begin{itemize}
         \item test: environments used only for testing, which can happen locally
             but also through CI platform.

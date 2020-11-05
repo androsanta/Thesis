@@ -137,6 +137,50 @@ export default class ${name} extends MongoBase {
     to keep a connection open.
 
     \subsection{Usage example}
-    @todo
+    The package can be used on a Restlessness project following this steps:
+
+    \paragraph{Installation}
+    It is possible to install the package using the npm CLI and then adding it to
+    the enabled restlessness addons using the restlessness CLI command add-dao
+    (\ref{lst:dao_mongo_install}).
+    \begin{lstlisting}[caption=dao-mongo installation, label={lst:dao_mongo_install}]
+$ npm install @restlessness/dao-mongo
+$ restlessness add-dao @restlessness/dao-mongo
+    \end{lstlisting}
+
+    \paragraph{Model creation}
+    Once installed it is possible to create, from the Web Interface, models based on
+    the Dao class provided by the package (\ref{fig:wi_dao_mongo_model}).
+
+    This corresponds to the creation of a model template that can be extended with
+    methods and fields (\ref{lst:new_model})
+    \begin{lstlisting}[caption=A new model based on the dao-mongo package, label={lst:new_model}]
+export default class User extends MongoBase {
+  ['constructor']: typeof User
+  name: string
+  age: number
+
+  static get collectionName() {
+    return 'users';
+  }
+};
+    \end{lstlisting}
+
+    \paragraph{Model usage}
+    It's then possible to perform database operations, exploiting the abstraction
+    provided by the MongoBase class, as shown on \ref{lst:user_model_usage}.
+    \begin{lstlisting}[caption=User model usage, label={lst:user_model_usage}]
+const user = new User();
+user.name = 'Andrea';
+user.age = 25;
+await user.save();
+    \end{lstlisting}
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{source/images/rln-wi-create-model.png}
+        \caption{Creation of a Model}
+        \label{fig:wi_dao_mongo_model}
+    \end{figure}
 
 \end{chapter}
