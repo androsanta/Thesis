@@ -1,4 +1,34 @@
 \begin{abstract}
-    todo\\
-    brief description of the thesis
+    In the scene of services for the creation of web applications is focusing more
+    and more towards a micro services oriented approach, moving away from structures
+    called monolithic.
+    The maximum representation of this is with the serverless paradigm, which since
+    2014 has seen an ever greater increase in its use and in its investments by the
+    major cloud providers.
+    Such a paradigm has found an implementation in the cloud model Functions as a
+    Service, which uses as its main resources, plain simple functions.
+    Serverless Framework has emerged as one the major framework that allow the usage
+    of the homonym paradigm in a simple way, and introducing a level of abstraction
+    regarding the underlying structure of the chosen cloud provider.
+    Despite the functionalities introduced by Serverless, the developer has to take
+    charge of various operations concerning indirectly the business logic of the
+    application, with the main one being: to structure the code base, to define the
+    various resources through the compilation of a configuration file, to define a
+    unit testing structure, fundamental once the application complexity increases.
+    Furthermore, based on the chosen cloud provider, the developer must find solutions
+    to problems such as Cold start, and limitations in the creation of resources.
+
+    The Restlessness framework was born with the goal of improving the user experience
+    of Serverless, providing a standard project and testing structure, a Command Line
+    Interface and a local Web Interface through which is possible to completely manage
+    the project, and with the further goal of minimizing all operations that do not
+    concern directly the application's business logic.
+    The framework is provided as an Open Source package, and with the possibility of
+    extending its functionalities, through the use of addons, some of which are already
+    present, to address common patterns, such as database access or authentication.
+    During the framework development has been possible to test it on real applications,
+    thus allowing to find and correct critical issues, whose main ones were: Cold start
+    handling, use of the non relational database mongodb, and limitations on the
+    applications structure proposed at the beginning.
+
 \end{abstract}
