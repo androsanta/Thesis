@@ -114,8 +114,29 @@ aStudent.graduationYear = 2021      // Valid
             in this folder.
     \end{itemize}
 
+    Listing \ref{lst:add_module} shows the \textit{package.json} of a simple module,
+    while \ref{lst:add_fn} shows the definition of a function, on that module,
+    exported using the CommonJs specification. To publish the package on the Npm
+    registry is possible to invoke the \textit{publish} command on the \textit{npm}
+    CLI. With the \textit{install} command that same package is installed as
+    dependency under the \textit{node\_modules} folder, and can be used as shown
+    on listing \ref{lst:add_require}
+
     \bigskip
-    \begin{lstlisting}[caption=CommonJs module definition]
+    \begin{lstlisting}[caption=A simple \textit{package.json}, label={lst:add_module}]
+{
+    "name": "add_module",
+    "version": "1.0.0",
+    "description": "Simple module example",
+    "main": "index.js",
+    "author": "Arthur Dent",
+    "license": "ISC"
+}
+    \end{lstlisting}
+
+    \bigskip
+    \begin{lstlisting}[caption=CommonJs module definition, label={lst:add_fn}]
+// index.js
 function add(n1, n2) {
     return n1 + n2
 }
@@ -124,20 +145,8 @@ module.exports = add
     \end{lstlisting}
 
     \bigskip
-    \begin{lstlisting}[caption=CommonJs module usage]
+    \begin{lstlisting}[caption=CommonJs module usage, label={lst:add_require}]
 const add = require('./add.js')
-    \end{lstlisting}
-
-    \bigskip
-    \begin{lstlisting}[caption=A simple \textit{package.json}]
-{
-    "name": "simple_module",
-    "version": "1.0.0",
-    "description": "Simple module example",
-    "main": "index.js",
-    "author": "Arthur Dent",
-    "license": "ISC"
-}
     \end{lstlisting}
 
     The Npm ecosystem has been used extensively during the development of Restlessness,
@@ -306,7 +315,7 @@ const add = require('./add.js')
     the development as it is completely automated.
     The CI approach is oftentimes related to another approach, which is the
     Continuous Delivery, defined as
-    \enquote*{
+    \enquote*{%
         Continuous Delivery (CD) is a software engineering approach in which teams
         keep producing valuable software in short cycles and ensure that the
         software can be reliably released at any time.%
