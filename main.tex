@@ -14,9 +14,13 @@
 \usepackage{dirtree}
 \usepackage{listings}
 % \usepackage{packages/tslistings} @todo set style
+\usepackage{csquotes}
+\usepackage{array}
+\usepackage{tabularx}
 
 \lstset{%
-    frame=single
+    frame=single,
+    captionpos=b
 }
 
 \hypersetup{%
@@ -44,14 +48,15 @@
     \renewcommand{\baselinestretch}{1.5}\normalsize
 
     \begin{mainmatter}
-        \input{source/intro}
-        \input{source/restlessness}
-        \input{source/extensions}
-        % \input{source/development}
-        \input{source/application}
-        % \input{source/deployment}
-        % \input{source/conclusions}
+        \input{source/cloud_models}
+        % \input{source/tools}
+        % \input{source/restlessness}
+        % \input{source/application}
+        % \input{source/future_works}
         \input{source/biblio}
     \end{mainmatter}
 
 \end{document}
+
+% @TODO parlare un pò di più della dashboard -> chap 1
+% @todo parlare anche di event e context, cosa contengono etc.. -> questo nel capitolo 2 quando si parla di aws!
