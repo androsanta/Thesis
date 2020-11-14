@@ -1,0 +1,25 @@
+@startuml AWS Lambda invocation
+
+!include <awslib/AWSCommon>
+!include <awslib/AWSSimplified.puml>
+!include <awslib/Mobile/APIGateway.puml>
+!include <awslib/Compute/Lambda.puml>
+!include <awslib/General/Users.puml>
+
+left to right direction
+
+cloud "AWS Cloud" {
+    package "Service 1" {
+        APIGateway(api, "API Gateway", " ")
+        Lambda(lambda, "Lambda function", " ")
+    }
+}
+
+Users(users, "Users", " ")
+
+users <-- api : request to gateway address (https://.../dev/user)
+users --> api : return response to user
+api <-- lambda : return computation result
+api --> lambda : pass request to associated function
+
+@enduml

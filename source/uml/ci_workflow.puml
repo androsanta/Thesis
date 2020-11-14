@@ -1,0 +1,64 @@
+@startuml CI Workflow
+
+left to right direction
+
+rectangle Workflows {
+    (@restlessness/core) as core
+    (@restlessness/cli) as cli
+}
+
+rectangle Jobs {
+    (Tests Job) as core_job_test
+    (Publish Job) as core_job_publish
+
+    (Tests Job) as cli_job_test
+    (Publish Job) as cli_job_publish
+}
+
+rectangle Steps {
+    ' Core
+    rectangle "Node.js container 1" {
+        (Dependencies) as core_job_test_step_deps
+        (Test) as core_job_test_step_test
+        (Publish) as core_job_test_step_publish
+        core_job_test_step_deps -- core_job_test_step_test
+        core_job_test_step_test -- core_job_test_step_publish
+    }
+    rectangle "Node.js container 2" {
+        (Dependencies) as core_job_publish_step_deps
+        (Test) as core_job_publish_step_test
+        (Publish) as core_job_publish_step_publish
+        core_job_publish_step_deps -- core_job_publish_step_test
+        core_job_publish_step_test -- core_job_publish_step_publish
+    }
+
+    ' CLI
+    rectangle "Node.js container 3" {
+        (Dependencies) as cli_job_test_step_deps
+        (Test) as cli_job_test_step_test
+        (Publish) as cli_job_test_step_publish
+        cli_job_test_step_deps -- cli_job_test_step_test
+        cli_job_test_step_test -- cli_job_test_step_publish
+    }
+
+    rectangle "Node.js container 4" {
+        (Dependencies) as cli_job_publish_step_deps
+        (Test) as cli_job_publish_step_test
+        (Publish) as cli_job_publish_step_publish
+        cli_job_publish_step_deps -- cli_job_publish_step_test
+        cli_job_publish_step_test -- cli_job_publish_step_publish
+    }
+
+}
+
+core -- core_job_test
+core -- core_job_publish
+core_job_test -- core_job_test_step_deps
+core_job_publish -- core_job_publish_step_deps
+
+cli -- cli_job_test
+cli -- cli_job_publish
+cli_job_test -- cli_job_test_step_deps
+cli_job_publish -- cli_job_publish_step_deps
+
+@enduml

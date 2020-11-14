@@ -1,0 +1,31 @@
+@startuml Lambda Authorizer
+
+!include <awslib/AWSCommon>
+!include <awslib/AWSSimplified.puml>
+!include <awslib/Mobile/APIGateway.puml>
+!include <awslib/Compute/Lambda.puml>
+!include <awslib/General/Users.puml>
+!include <awslib/SecurityIdentityAndCompliance/Shield.puml>
+!include <awslib/Database/Database.puml>
+!include <awslib/Compute/LambdaLambdaFunction.puml>
+
+left to right direction
+
+Users(users, "Users", " ")
+
+LambdaLambdaFunction(lambda_auth, "Lambda Auth function", " ")
+APIGateway(api, "API Gateway", " ")
+Shield(shield, "Policy evaluation", " ")
+Database(db, "Policy cache", " ")
+Lambda(lambda, "Lambda function", " ")
+
+users --> api : 1. request with a bearer token
+api <-- lambda_auth : 3. Principal + Policy
+api --> lambda_auth : 2. token
+api --> shield: 4.
+shield --> users: 6a. 403 Denied
+shield --> db : 5. save evaluation result
+shield --> lambda : b. Access granted
+
+
+@enduml

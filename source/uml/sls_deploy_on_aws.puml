@@ -1,0 +1,31 @@
+@startuml Serverless Deploy on AWS
+
+hide footbox
+
+actor User as user
+
+== Initialization ==
+box AWS
+user -> CloudFormation : create CloudFormation Stack
+activate CloudFormation
+user -> S3 : create S3 Bucket
+activate S3
+user <- CloudFormation : Stack created
+deactivate CloudFormation
+user <- S3 : Bucket created
+deactivate S3
+end box
+
+== Upload artifact ==
+user -> S3 : upload users.zip artifact and CloudFormation Stack
+activate S3
+CloudFormation <- S3 : upload completed
+deactivate S3
+activate CloudFormation
+
+== Resource creation ==
+
+user <- CloudFormation : resource creation completed
+deactivate CloudFormation
+
+@enduml

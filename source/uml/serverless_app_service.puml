@@ -1,0 +1,16 @@
+@startuml Serverless App and Services structure
+
+rectangle Organization
+rectangle Application
+artifact Service {
+    file "serverless.yml"
+}
+component Function {
+    file "handler.js"
+}
+
+Organization "1" -right- "*" Application
+Application "1" -- "*" Service : "is part of" <
+Service "1" -- "*" Function : "is composed by" >
+
+@enduml
