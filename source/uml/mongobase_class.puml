@@ -1,0 +1,19 @@
+@startuml MongoBase class
+
+class MongoBase {
+    +_id: ObjectId
+    +created: Date
+    +lastEdit: Date
+    +get collectionName(): string
+    +get dao(): MongoDao
+    +getById(_id: ObjectId): boolean
+    +getList()
+    +getCounter(query)
+    +save()
+    +update()
+    +patch(fields)
+    +remove()
+    +createIndex(key, options)
+}
+
+@enduml

@@ -1,25 +1,6 @@
 \begin{chapter}{Restlessness Extensions}
     \label{chap:extensions}
 
-    The framework has been designed from the beginning with the possibility of
-    extending its functionalities using external packages.
-    To achieve this, has been defined an AddOnPackage class, containing the
-    following lifecycle hooks:
-    \begin{itemize}
-        \item postInstall: executed after the addon package has been installed.
-            Here it's possible to perform initialization operations.
-        \item postEnvCreated: executed after a new environment has been created,
-            so the addon can add its own environment variables if needed.
-        \item beforeEndpoint: executed before the corresponding function of an
-            endpoint. Here it's possible to perform resource initialization,
-            for example opening a database connection.
-        \item beforeSchedule: as for endpoints, it's executed before the
-            corresponding function of a schedule.
-    \end{itemize}
-
-    In addition to this class Restlessness provides also more specific classes,
-    for authentication and data access.
-
     % \section{Authentication}
     % auth-jwt and auth-cognito packages
 
@@ -33,6 +14,7 @@
     abstract class DaoPackage (listing \ref{lst:daopackage}), which extends the
     AddOnPackage class previously defined.
 
+    \bigskip
     \begin{lstlisting}[caption=DaoPackage class definition, label={lst:daopackage}]
 abstract class DaoPackage extends AddOnPackage {
     abstract modelTemplate(modelName: string): string
@@ -48,43 +30,24 @@ abstract class DaoPackage extends AddOnPackage {
     \subsection{Dao for mongodb}
     Restlessness already provides a Dao package for the popular non relational
     database \href{https://www.mongodb.com/}{mongodb}, and it's available on the
-    npm platform as '@restlessness/dao-mongo'.
+    npm platform as \mbox{\textit{@restlessness/dao-mongo}}.
     That package exports two main components, an implementation of the DaoPackage
     class, and a MongoBase class, the base class containing the main Dao
-    functionalities for CRUD operations, as shown on listing \ref{lst:mongobase}.
+    functionalities for CRUD operations, as shown on listing \ref{fig:mongobase}.
 
-    \begin{lstlisting}[caption=MongoBase class definition, label={lst:mongobase}]
-export default class MongoBase {
-    _id: ObjectId
-    created: Date
-    lastEdit: Date
-
-    static get collectionName()
-    static get dao(): MongoDao
-    async getById(_id: ObjectId): Promise<boolean>
-    static async getList<T>(
-      query: QuerySelector<T> = {},
-      limit: number = 10,
-      skip: number = 0,
-      sortBy: string = null,
-      asc: boolean = true
-    ): Promise<T[]>
-    static async getCounter<T>(
-        query: QuerySelector<T> = {}): Promise<number>
-    async save()
-    async update()
-    async patch(fields: any): Promise<boolean>
-    async remove<T>(): Promise<boolean>
-    static async createIndex(
-        keys, options): Promise<boolean>
-}
-    \end{lstlisting}
+    \begin{figure}
+        \centering
+        \includegraphics[width=5.5cm]{source/diagrams/mongobase_class.png}
+        \caption{MongoBase class}
+        \label{fig:mongobase}
+    \end{figure}
 
     Users of the package can then create models based on the MongoBase class through
-    the Restlessness Web Interface (\ref{subsec:models}).
+    the Restlessness Web Interface.
     The creation of that model is made possible by implementing the DaoPackage.modelTemplate
     method, as shown on listing \ref{lst:model_template}.
 
+    \bigskip
     \begin{lstlisting}[caption=modelTemplate function definition, label={lst:model_template}]
 const modelTemplate = (name: string): string => `
 import {
@@ -121,7 +84,12 @@ export default class ${name} extends MongoBase {
     costs of function initialization and also database connection, making it possible
     to enable warmup only on a small group of functions, so the overall performance
     improves or stays the same.
-    % @todo figure to illustrate (database <-> proxy <-> function) structure
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{source/diagrams/mongo_proxy.png}
+        \caption{Mongo proxy structure}
+    \end{figure}
 
     To implement this structure has been developed a serverless plugin, named
     \href{https://www.npmjs.com/package/serverless-mongo-proxy}{serverless-mongo-proxy},
@@ -129,7 +97,7 @@ export default class ${name} extends MongoBase {
     The plugin automatically creates the serverless proxy function in the specified
     service, which in the case of Restlessness is the shared one, so all services
     can exploit the advantages of using a proxy.
-    Since all informations exchanged between serverless functions must be serialized,
+    Since all information exchanged between serverless functions must be serialized,
     the plugin used the \href{http://bsonspec.org/}{bson} encoding, to obtain consistent
     representation for data types such as dates and regular expressions.
 
@@ -143,6 +111,8 @@ export default class ${name} extends MongoBase {
     It is possible to install the package using the npm CLI and then adding it to
     the enabled restlessness addons using the restlessness CLI command add-dao
     (\ref{lst:dao_mongo_install}).
+
+    \bigskip
     \begin{lstlisting}[caption=dao-mongo installation, label={lst:dao_mongo_install}]
 $ npm install @restlessness/dao-mongo
 $ restlessness add-dao @restlessness/dao-mongo
@@ -154,6 +124,8 @@ $ restlessness add-dao @restlessness/dao-mongo
 
     This corresponds to the creation of a model template that can be extended with
     methods and fields (\ref{lst:new_model})
+
+    \bigskip
     \begin{lstlisting}[caption=A new model based on the dao-mongo package, label={lst:new_model}]
 export default class User extends MongoBase {
   ['constructor']: typeof User
@@ -169,6 +141,8 @@ export default class User extends MongoBase {
     \paragraph{Model usage}
     It's then possible to perform database operations, exploiting the abstraction
     provided by the MongoBase class, as shown on \ref{lst:user_model_usage}.
+
+    \bigskip
     \begin{lstlisting}[caption=User model usage, label={lst:user_model_usage}]
 const user = new User();
 user.name = 'Andrea';

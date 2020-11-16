@@ -1,0 +1,29 @@
+@startuml
+
+!include <awslib/AWSCommon>
+!include <awslib/AWSSimplified.puml>
+!include <awslib/Database/Database.puml>
+!include <awslib/Mobile/APIGateway.puml>
+!include <awslib/Compute/Lambda.puml>
+!include <awslib/General/User.puml>
+
+left to right direction
+
+cloud "AWS Cloud" {
+    APIGateway(api, "API Gateway", " ")
+    Lambda(lambda, "Lambda function", " ")
+    Lambda(lambda2, "Lambda function 2", " ")
+    Lambda(proxy, "Proxy function", " ")
+    Database(mongo, "Mongo Db", "")
+}
+
+User(user, "User", "")
+
+user --> api : request
+api --> lambda
+api --> lambda2
+lambda --> proxy : proxy invocation
+lambda2 --> proxy : proxy invocation
+proxy --> mongo : db access
+
+@enduml
