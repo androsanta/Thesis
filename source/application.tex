@@ -65,11 +65,10 @@
         \label{fig:cold_start_duration}
     \end{figure}
 
-    % In the particular case of the project Spazio alla scuola the Cold start duration
-    % was experienced in the order of 1.5 seconds, caused
-    % @todo check values from the serverless dashboard, write then the main components:
-    % mongodb initialization and connection (about 500ms), third party libraries
-    % (about 200ms) and Restlessness overhead (about 50ms, but check again)
+    In the particular case of the project Spazio alla scuola the Cold start duration
+    was experienced to be in the order of 1.5s, caused mainly from: mongodb
+    initialization and connection (about 500ms) and third party libraries (about 400ms)
+    and Restlessness overhead (about 50ms).
 
     One of the approaches to mitigate the effect of the Cold start proposed by the
     Serverless community has been the plugin named
@@ -85,12 +84,6 @@
     need it.
     By including the warmup plugin into the framework the effect of Cold start has
     been mitigated, however it introduced another type of issue.
-    \begin{figure}
-        \centering
-        % \includegraphics[width=\linewidth]{source/images/} @todo
-        \caption{Endpoint resource with warmup enabled}
-        \label{fig:wi_endpoint_warmup}
-    \end{figure}
 
     \section{Database proxy}
     The project Spazio alla scuola rely on the popular non relational database
