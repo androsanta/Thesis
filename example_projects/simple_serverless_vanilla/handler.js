@@ -5,5 +5,10 @@ const mockDb = {
 async function usersCreate(event, context) {
     const user = {name: 'sample_name', surname: 'sample_surname'}
     await mockDb.createUser(user)
-    return user
+    return {
+        statusCode: 200,
+        body: JSON.stringify({user})
+    }
 }
+
+module.exports = {usersCreate}
