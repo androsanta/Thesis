@@ -1,0 +1,13 @@
+@startuml AuthorizerPackage class
+
+abstract class AuthorizerPackage {
+    +createToken()
+    +verifyToken()
+    +parseSession()
+    +getSessionModelName()
+    +getSessionModelImport()
+    +authorizer()
+    +generatePolicy()
+}
+
+@enduml

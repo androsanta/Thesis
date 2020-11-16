@@ -1,18 +1,111 @@
 \begin{chapter}{Restlessness Extensions}
     \label{chap:extensions}
 
-    % \section{Authentication}
-    % auth-jwt and auth-cognito packages
+    \section{Authorization}
+    Serverless functions can also perform authorization operations, as described
+    on \ref{subsec:lambda_invocation}. Restlessness provides the abstract class
+    \textit{AuthorizerPackage}, extending \textit{AddOnPackage}, which provides
+    a standard structure to define token based authorizer functions.
 
-    % \subsection{Usage example}
-    % @todo
+    \begin{figure}
+        \centering
+        \includegraphics[width=5.5cm]{source/diagrams/authorizer_package_class.png}
+        \caption{AuthorizerPackage class}
+    \end{figure}
+
+    \subsection{Jwt Authorizer}
+    Restlessness already provides the package \mbox{\textit{@restlessness/auth-jwt}},
+    implementing the Json Web Token authorization method, defined as:
+
+    \enquote*{%
+        JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact
+        and self-contained way for securely transmitting information between parties
+        as a JSON object. This information can be verified and trusted because it
+        is digitally signed. JWTs can be signed using a secret (with the HMAC
+        algorithm) or a public/private key pair using RSA or ECDSA.%
+    } \cite{json_web_token}
+
+    In its compact form, the token consist of three parts separated by dots,
+    which are:
+    \begin{itemize}
+        \item Header: It typically consists of two parts: the type of token, which
+            is \textit{JWT}, and the signing algorithm used. The JSON object
+            containing those keys is then Base64url encoded, creating the first
+            part of the token.
+        \item Payload: It contains the claims, which are statements about an entity,
+            which usually is the user, plus any additional data. Also this JSON
+            object is then Base64url encoded, and form the second part of the token.
+        \item Signature: The third part is the signature obtained by signing the
+            already created part (Header and Payload separated by a dot) with a
+            secret.
+    \end{itemize}
+    The final output are tree Base64url strings, separated by dots, that can be
+    easily passed in an Http environment. In the case of the Jwt Authorizer function
+    it will be included in the requests in the \textit{Authorization} header,
+    with type \textit{Bearer}
+
+    \subsection{Usage example}
+    The package can be used on a Restlessness project following this steps:
+
+    \paragraph{Installation}
+    The package can be installed using the npm CLI and then added to the project
+    using the Restlessness CLI, particularly with the \textit{add-auth} command
+    (\ref{lst:auth_jwt_install}).
+
+    \bigskip
+    \begin{lstlisting}[caption=auth-jwt installation, label={lst:auth_jwt_install}]
+$ npm install @restlessness/auth-jwt
+$ restlessness add-auth @restlessness/auth-jwt
+    \end{lstlisting}
+
+    \paragraph{Model creation}
+    Once installed, the package automatically creates a model class, named
+    \textit{JwtSession}, based on the template defined by the package, and it can
+    then be extended as needed (\ref{lst:new_model_auth}).
+
+    \bigskip
+    \begin{lstlisting}[caption=A JwtSession class created by the auth-jwt package, label={lst:new_model_auth}]
+export default class JwtSession {
+  ['constructor']: typeof JwtSession
+  id: string
+
+  async serialize(): Promise<string> {
+    return JSON.stringify(this);
+  }
+
+  static async deserialize(
+      session: string): Promise<JwtSession> {
+    const jwtSession = new JwtSession();
+    Object.assign(jwtSession, JSON.parse(session));
+    return jwtSession;
+  }
+};
+    \end{lstlisting}
+
+    \paragraph{Model usage}
+    It's then possible to create a session and generate the Jwt token, as shown
+    on \ref{lst:jwt_usage}.
+
+    \bigskip
+    \begin{lstlisting}[caption=User model usage, label={lst:jwt_usage}]
+// Generate session and serialize it
+const session = new JwtSession();
+session.id = myId;
+session.name = 'Arthur';
+session.permissions = [];
+const serialized = session.serialize();
+
+// Deserialize it
+const deserialized = JwtSession.deserialize(serialized);
+console.log(deserialized.name) // --> Output: Arthur
+    \end{lstlisting}
 
     \section{Data Access Object}
     \label{sec:data_access_object}
 
     To simplify the creation of a Data Access Object, Restlessness provides the
-    abstract class DaoPackage (listing \ref{lst:daopackage}), which extends the
-    AddOnPackage class previously defined.
+    abstract class \textit{DaoPackage} (listing \ref{lst:daopackage}), which extends
+    the \textit{AddOnPackage} class previously defined.
 
     \bigskip
     \begin{lstlisting}[caption=DaoPackage class definition, label={lst:daopackage}]
@@ -109,7 +202,7 @@ export default class ${name} extends MongoBase {
 
     \paragraph{Installation}
     It is possible to install the package using the npm CLI and then adding it to
-    the enabled restlessness addons using the restlessness CLI command add-dao
+    the enabled restlessness addons using the restlessness CLI command \textit{add-dao}
     (\ref{lst:dao_mongo_install}).
 
     \bigskip
