@@ -1,0 +1,28 @@
+@startuml API Gateway with multiple services
+
+!include <awslib/AWSCommon>
+!include <awslib/AWSSimplified.puml>
+!include <awslib/Mobile/APIGateway.puml>
+!include <awslib/Compute/Lambda.puml>
+!include <awslib/General/User.puml>
+
+left to right direction
+
+cloud "AWS Cloud" {
+    package "Shared service" {
+        APIGateway(api, "API Gateway", " ")
+        Lambda(lambda1, "Lambda function", " ")
+    }
+    package "Users service" {
+        Lambda(lambda2, "Lambda function", " ")
+    }
+}
+
+User(user, "User", " ")
+
+user --> api
+api --> lambda1
+api --> lambda2
+
+
+@enduml

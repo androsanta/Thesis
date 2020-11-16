@@ -1,0 +1,27 @@
+@startuml Restlessness AddOnPackage
+
+left to right direction
+
+abstract class AddOnPackage {
+    +load(packageName)
+    +postInstall()
+    +postEnvCreated(envName)
+    +beforeEndpoint(event, context)
+    +beforeSchedule(event, context)
+}
+
+abstract class AuthorizerPackage extends AddOnPackage {
+    +createToken()
+    +verifyToken()
+    +parseSession()
+    +getSessionModelName()
+    +getSessionModelImport()
+    +authorizer()
+    +generatePolicy()
+}
+
+abstract class DaoPackage extends AddOnPackage {
+    +modelTemplate(modelName)
+}
+
+@enduml

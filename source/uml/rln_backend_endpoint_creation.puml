@@ -1,0 +1,16 @@
+@startuml Endpoint creation
+
+left to right direction
+
+database "project files\non filesystem" as project_files
+package "@restlessness/core" as core
+rectangle "Backend Api server" as backend
+rectangle "Frontend" as frontend
+component EndpointModel as model
+
+frontend --> backend : "POST\nhttp://localhost:4123/endpoints"
+backend --> model : frontend input
+model -up-> core : data formatted >
+core -up-> project_files : "save information\non configuration files"
+
+@enduml

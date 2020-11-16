@@ -1,0 +1,14 @@
+@startuml BaseModel class
+
+class BaseModel {
+    +id: string
+    +getById()
+    +getList()
+    +add()
+    +remove()
+    +update()
+    +toConfigEntry()
+    +fromConfigEntry()
+}
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml Restlessness Components
+
+left to right direction
+
+rectangle "@restlessness/core" as core
+rectangle "@restlessness/cli" as cli
+rectangle "Frontend\n Web Interface" as frontend
+rectangle "Backend\n API server" as backend
+
+core --> cli : used by
+cli --> frontend : provides
+cli --> backend : provides
+
+@enduml

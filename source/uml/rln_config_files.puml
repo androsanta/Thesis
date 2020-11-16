@@ -1,0 +1,39 @@
+@startuml Configuration files structure
+
+abstract class JsonConfigFile<T extends JsonConfigEntry> {
+    +entries: T[]
+    +get jsonPath(): string
+    +read()
+    +write()
+    +getEntryById(id: string)
+    +addEntry(entry: T)
+    +removeEntryById(id: string)
+    +updateEntry(entry: T)
+}
+
+class JsonAuthorizers extends JsonConfigFile {}
+class JsonDaos extends JsonConfigFile {}
+
+class JsonEndpoints extends JsonConfigFile {
+    +create()
+    +generateExporter()
+}
+
+class JsonEnvs extends JsonConfigFile {
+    +create(id: string)
+}
+
+class JsonModels extends JsonConfigFile {
+    +create()
+}
+
+class JsonSchedules extends JsonConfigFile {
+    +createSchedule()
+    +generateExporter()
+}
+
+interface JsonConfigEntry {
+    +id: string
+}
+
+@enduml

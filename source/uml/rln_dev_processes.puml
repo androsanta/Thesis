@@ -1,0 +1,14 @@
+@startuml Restlessness dev command generated processes
+
+left to right direction
+
+node "Cli process" as cli
+node "Backend process\nhttp://localhost:4123" as backend
+node "Frontend process\nhttp://localhost:5000" as frontend
+node "Project process\nhttp://locahost:4000" as project
+
+cli --> backend
+cli --> frontend
+cli --> project
+
+@enduml

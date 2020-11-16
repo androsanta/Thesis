@@ -1,0 +1,16 @@
+@startmindmap Frontend site map
+* Dashboard\n/
+    ** Endpoints\n/endpoints
+        *** Endpoint\n/endpoints/{id}
+        *** Create Endpoint\n/endpoints/create
+    ** Schedules\n/schedules
+        *** Schedule\n/schedules/{id}
+        *** Create Schedule\n/schedules/create
+    ** Infos\n/infos
+    ** Services\n/services
+        *** Service\n/services/{id}
+        *** Create Service\n/services/create
+    ** Models\n/models
+        *** Model\n/models/{id}
+        *** Create Model\n/models/create
+@endmindmap
