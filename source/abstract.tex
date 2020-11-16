@@ -7,10 +7,10 @@
     major cloud providers.
     Such a paradigm has found an implementation in the cloud model Functions as a
     Service, which uses as its main resources, plain simple functions.
-    Serverless Framework has emerged as one the major framework that allow the usage
-    of the homonym paradigm in a simple way, and introducing a level of abstraction
-    regarding the underlying structure of the chosen cloud provider.
-    Despite the functionalities introduced by Serverless, the developer has to take
+    Serverless Framework has emerged as one of the major framework that allows the
+    usage of the homonym paradigm in a simple way, and introduce a level of
+    abstraction regarding the underlying structure of the chosen cloud provider.
+    Despite the functionalities introduced by Serverless, the developer must take
     charge of various operations concerning indirectly the business logic of the
     application, with the main one being: to structure the code base, to define the
     various resources through the compilation of a configuration file, to define a
@@ -27,8 +27,41 @@
     extending its functionalities, through the use of addons, some of which are already
     present, to address common patterns, such as database access or authentication.
     During the framework development has been possible to test it on real applications,
-    thus allowing to find and correct critical issues, whose main ones were: Cold start
-    handling, use of the non relational database mongodb, and limitations on the
-    applications structure proposed at the beginning.
+    thus allowing to find and correct critical issues, with the main ones being:
+    Cold start handling, use of the non relational database mongodb, and limitations
+    on the applications structure proposed at the beginning.
 
 \end{abstract}
+
+% Il panorama dei servizi per la creazione di applicazioni web si sta indirizzando
+% sempre più verso un approcio orientato ai micro servizi, allontanandosi dalla
+% struttura denominata monolitica.
+% La massima rappresentazione di ciò si ha con il paradigma serverless, il quale a
+% partire dal 2014 ha visto un sempre maggiore incremento nel suo utilizzo e
+% nell' investimento da parte dei maggiori cloud providers.
+% Tale paradigma ha trovato realizzazione nel modello cloud Funcions as a Service,
+% il quale utilizza come principale risorsa le singole funzioni.
+% Serverless Framework è emerso come uno dei maggiori framework che consentono di
+% utilizzare l'omonimo paradigma in modo semplice e introducendo un livello di
+% astrazione riguardo la struttura sottostante del cloud provider scelto.
+% Nonostante le funzionalità introdotte da Serverless, lo sviluppatore deve farsi
+% carico di diverse operazioni che riguardano in maniera indiretta la business logic
+% del servizio che si vuole creare, e le principali sono: strutturare la code base,
+% definire le varie risorse tramite la compilazione di file di configurazione,
+% definire una struttura di unit testing, fondamentale una volta che l'applicazione
+% aumenta in dimensioni. Inoltre a seconda del cloud provider scelto si dovranno
+% trovare soluzioni per fenomeni di Cold start e limitazioni nella creazione delle
+% risorse.
+
+% Il framework Restlessness nasce con l'obiettivo di migliorare l'esperienza d'uso
+% di Serverless, fornendo una struttura di progetto e di testing standard, una
+% Command Line Interface ed una local Web Interface tramite le quali sia possibile
+% gestire interamente il progetto, e con l'ulteriore obiettivo di minimizzare tutte
+% quelle operazioni che non riguardano direttamente la business logic dell'applicazione.
+% Il framework viene fornito in modalità open source, alla possibilità di estendere
+% le sue funzionalità tramite l'utilizzo di addons, alcuni dei quali già presenti
+% to address common patterns, come l'accesso al database o l'autenticazione.
+% Durante lo sviluppo del framework è stato possibile testare lo stesso su applicazioni
+% reali, e questo ha permesso di trovare e correggere alcune criticità, le cui
+% principali sono state: gestione del cold start, utilizzo del database non relazionale
+% mongodb e limitazioni nella struttura delle applicazioni inizialmente proposta.

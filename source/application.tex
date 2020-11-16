@@ -13,7 +13,6 @@
     Its purpose is to work in support of scientific research and to disseminate
     knowledge of the conditions on which Italy's progress depends.
 
-    \section{Spazio alla scuola}
     The project Spazio alla scuola aims to provide a concrete support to school
     leaders for lecture resumption on September 2020, given the health situation on the
     country due to the SARS-CoV-2 pandemic.
@@ -22,7 +21,7 @@
     The platform is provided as a free service and is available at the address
     \url{www.spazioallascuola.it}.
 
-    \subsection{Cold start}
+    \section{Cold start}
     \label{subsec:cold_start}
 
     The first encountered problem has been Cold start, a new term in the serverless
@@ -80,7 +79,7 @@
     This way the Cold start effect remains present, but the end user of the api does
     not experience it.
 
-    Has been decided to make this plugin an integral part of the Restlessness framework,
+    It as been decided to make this plugin an integral part of the Restlessness framework,
     granting out of the box support for it. From the Web Interface is possible to
     enabled or disable the warmup on the single endpoint, since not all functions may
     need it.
@@ -93,7 +92,7 @@
         \label{fig:wi_endpoint_warmup}
     \end{figure}
 
-    \subsection{Database proxy}
+    \section{Database proxy}
     The project Spazio alla scuola rely on the popular non relational database
     \href{https://www.mongodb.com}{mongodb}. As stated previously, each function
     run in its own runtime, independently from the others, consequently each function
@@ -108,7 +107,7 @@
     performing database operations.
     \begin{figure}
         \centering
-        % \includegraphics[width=\linewidth]{source/images/} @todo
+        \includegraphics[width=7cm]{source/images/mongo-connections.png}
         \caption{Mongodb connections reaching the 500 threshold}
     \end{figure}
 
@@ -130,7 +129,8 @@
     The dao-mongo package then uses the plugin internally, providing an effective
     solution to the presented problem.
 
-    \subsection{Micro services}
+    \section{Micro services}
+    \label{subsec:application_micro_services}
     During the deployment of an application on the Aws platform a number of resources
     are created for each function, to provides services such as logging, api gateway
     for http events, permissions and others functionalities. The Aws platform has a
@@ -142,18 +142,15 @@
     low complexity services.
     So the next step in the Restlessness framework development has been to switch
     between the management of a single service, to a multitude of services, under
-    the same Restlessness project (\ref{sec:rln_project_creation}). With this
-    approach has been possible to split the functions of the project Spazio alla
-    scuola into multiple services, obtaining a more fine grained separation between
-    its logic components.
+    the same Restlessness project. With this approach has been possible to split
+    the functions of the project Spazio alla scuola into multiple services, obtaining
+    a more fine grained separation between its logic components.
 
     \bigbreak
     In conclusion the choice of using serverless, combined with the Restlessness
     framework for the backend api of Spazio alla scuola, brought the desired benefits
-    in terms of ease of development, after the proper framework
-    improvements described previously.
-    At its peak, the api service has managed 500 thousand requests, demonstrating
-    the advantage of the natural scalability of the serverless approach.
-
+    in terms of ease of development, after the proper framework improvements described
+    previously. At its peak, the api service has managed 500 thousand requests,
+    demonstrating the advantage of the natural scalability of the serverless approach.
 
 \end{chapter}
