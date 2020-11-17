@@ -75,13 +75,13 @@ a = 42
     \bigskip
     \begin{lstlisting}[caption=Static type checking on Typescript, label={ts_static}]
 interface Student {
-    name: string
-    graduationYear: number
+  name: string
+  graduationYear: number
 }
 
 const aStudent: Student = {
-    name: 'Arthur Dent',
-    graduationYear: 2020
+  name: 'Arthur Dent',
+  graduationYear: 2020
 }
 
 aStudent.graduationYear = '2020'    // Invalid
@@ -138,7 +138,7 @@ aStudent.graduationYear = 2021      // Valid
     \begin{lstlisting}[caption=CommonJs module definition, label={lst:add_fn}]
 // index.js
 function add(n1, n2) {
-    return n1 + n2
+  return n1 + n2
 }
 
 module.exports = add

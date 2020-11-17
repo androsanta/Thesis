@@ -229,26 +229,26 @@ org: my-company-org
 app: chat-app
 service: users
 provider:
-    name: aws
-    runtime: nodejs12.x
+  name: aws
+  runtime: nodejs12.x
 functions:
-    usersCreate:
-        handler: handler.usersCreate
-        events:
-            - http: post users/create
+  usersCreate:
+    handler: handler.usersCreate
+    events:
+      - http: post users/create
     \end{lstlisting}
 
     \begin{lstlisting}[caption=Simple handler function, label={lst:handler_fun}]
 async function usersCreate(event, context) {
-    const user = {
-        name: 'sample_name',
-        surname: 'sample_surname'
-    }
-    await mockDb.createUser(user)
-    return {
-        statusCode: 200,
-        body: JSON.stringify({user})
-    }
+  const user = {
+    name: 'sample_name',
+    surname: 'sample_surname'
+  }
+  await mockDb.createUser(user)
+  return {
+    statusCode: 200,
+    body: JSON.stringify({user})
+  }
 }
     \end{lstlisting}
 

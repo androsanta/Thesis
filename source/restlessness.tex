@@ -562,24 +562,24 @@ $       POST | http://localhost:4000/dev/users
 
     \begin{lstlisting}[caption=handler.ts content, label={lst:handler_ts}]
 export default async (req: Request) => {
-    try {
-        const {
-            validationResult,
-            payload,
-        } = req;
+  try {
+    const {
+        validationResult,
+        payload,
+    } = req;
 
-        if (!validationResult.isValid) {
-            return ResponseHandler.json({
-                message: validationResult.message
-            }, StatusCodes.BadRequest);
-        }
-
-        return ResponseHandler.json({});
-    } catch (e) {
-        console.error(e);
-        return ResponseHandler.json(
-            {}, StatusCodes.InternalServerError);
+    if (!validationResult.isValid) {
+        return ResponseHandler.json({
+            message: validationResult.message
+        }, StatusCodes.BadRequest);
     }
+
+    return ResponseHandler.json({});
+  } catch (e) {
+    console.error(e);
+    return ResponseHandler.json(
+        {}, StatusCodes.InternalServerError);
+  }
 };
     \end{lstlisting}
 
@@ -592,16 +592,16 @@ export default LambdaHandler
     \bigskip
     \begin{lstlisting}[caption=validations.ts content, label={lst:validations_ts}]
 const queryStringParametersValidations =
-(): YupShapeByInterface<QueryStringParameters>  => ({});
+  (): YupShapeByInterface<QueryStringParameters>  => ({});
 
 const payloadValidations =
-(): YupShapeByInterface<Payload> => ({});
+  (): YupShapeByInterface<Payload> => ({});
 
 export default () => ({
-    queryStringParameters: yup.object()
-        .shape(queryStringParametersValidations()),
-    payload: yup.object()
-        .shape(payloadValidations()).noUnknown(),
+  queryStringParameters: yup.object()
+    .shape(queryStringParametersValidations()),
+  payload: yup.object()
+    .shape(payloadValidations()).noUnknown(),
 });
     \end{lstlisting}
 
@@ -665,22 +665,22 @@ export default ScheduleHandler.bind(this, handler, 'clean');
 const postUsers = 'postUsers';
 
 beforeAll(async done => {
-    await TestHandler.beforeAll();
-    done();
+  await TestHandler.beforeAll();
+  done();
 });
 
 describe('postUsers API', () => {
-    test('', async (done) => {
-        const res = await TestHandler.invokeLambda(
-            postUsers);
-        // expect(res.statusCode).toBe(StatusCodes.OK);
-        done();
-    });
+  test('', async (done) => {
+    const res = await TestHandler.invokeLambda(
+        postUsers);
+    // expect(res.statusCode).toBe(StatusCodes.OK);
+    done();
+  });
 });
 
 afterAll(async done => {
-    await TestHandler.afterAll();
-    done();
+  await TestHandler.afterAll();
+  done();
 });
     \end{lstlisting}
 
