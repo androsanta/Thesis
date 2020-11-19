@@ -10,6 +10,7 @@ left to right direction
 
 skinparam {
     ArrowFontColor black
+    ArrowFontSize 18
 }
 
 cloud "AWS Cloud" {

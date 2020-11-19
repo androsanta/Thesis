@@ -13,6 +13,7 @@ left to right direction
 
 skinparam {
     ArrowFontColor black
+    ArrowFontSize 18
 }
 
 Users(users, "Users", " ")
