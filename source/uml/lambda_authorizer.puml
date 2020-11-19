@@ -11,6 +11,10 @@
 
 left to right direction
 
+skinparam {
+    ArrowFontColor black
+}
+
 Users(users, "Users", " ")
 
 LambdaLambdaFunction(lambda_auth, "Lambda Auth function", " ")

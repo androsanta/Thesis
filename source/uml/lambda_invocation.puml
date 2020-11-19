@@ -8,6 +8,10 @@
 
 left to right direction
 
+skinparam {
+    ArrowFontColor black
+}
+
 cloud "AWS Cloud" {
     package "Service 1" {
         APIGateway(api, "API Gateway", " ")
