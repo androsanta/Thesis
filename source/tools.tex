@@ -359,7 +359,8 @@ const add = require('./add.js')
     container, as shown on listing \ref{lst:ci_executor}:
 
     \bigskip
-    \begin{code}[caption=Reusable executor definition, label={lst:ci_executor}]
+    \begin{code}[caption=Reusable executor definition, label={lst:ci_executor},
+        language=yaml]
 executors:
   node12:
     docker:
@@ -500,7 +501,8 @@ executors:
     grants access.
 
     \bigskip
-    \begin{code}[caption=Authorizer definition on Serverless, label={lst:sls_auth}]
+    \begin{code}[caption=Authorizer definition on Serverless, label={lst:sls_auth},
+        language=yaml]
 functions:
   auth:
     handler: auth.customAuth  # auth.js

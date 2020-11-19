@@ -224,7 +224,8 @@
     as show on listing \ref{lst:handler_fun}.
 
     \bigskip
-    \begin{code}[caption=Simple serverless.yml file, label={lst:simple_sls_yml}]
+    \begin{code}[caption=Simple serverless.yml file,
+        label={lst:simple_sls_yml}, language=yaml]
 org: my-company-org
 app: chat-app
 service: users
@@ -238,7 +239,7 @@ functions:
       - http: post users/create
     \end{code}
 
-    \begin{code}[caption=Simple handler function, label={lst:handler_fun}]
+    \begin{code}[caption=Simple handler function,label={lst:handler_fun}]
 async function usersCreate(event, context) {
   const user = {
     name: 'sample_name',
@@ -270,7 +271,7 @@ async function usersCreate(event, context) {
     the chosen provider, as shown on listing \ref{lst:sls_deploy}.
 
     \bigskip
-    \begin{code}[caption=Deploy command, label={lst:sls_deploy}]
+    \begin{code}[caption=Deploy command, label={lst:sls_deploy}, language=shell]
 $ serverless deploy
 Serverless: Stack update finished...
 Service Information
@@ -299,7 +300,7 @@ layers:
     on listing \ref{lst:sls_invoke}
 
     \bigskip
-    \begin{code}[caption=Invoke command, label={lst:sls_invoke}]
+    \begin{code}[caption=Invoke command, label={lst:sls_invoke}, language=shell]
 $ serverless invoke -f usersCreate
 {
     "statusCode": 200,

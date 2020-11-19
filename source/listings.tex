@@ -1,0 +1,76 @@
+\usepackage{color}
+\usepackage[pdftex]{xcolor}
+\usepackage{textcomp}
+\usepackage{caption}
+
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{keywords}{HTML}{CC7832}
+\definecolor{string}{HTML}{6A8759}
+\definecolor{number}{HTML}{6897BB}
+\definecolor{comment}{HTML}{2f2f2f}
+
+% Base styling
+\lstset{%
+    frame=single,
+    captionpos=b,
+    basicstyle=\normalfont\ttfamily,
+    backgroundcolor=\color{lightgray},
+    extendedchars=true,
+    numbers=left,
+    numberstyle=\footnotesize,
+    numbersep=9pt,
+    tabsize=2,
+    keywordstyle=\color{keywords}\bfseries,
+    ndkeywordstyle=\color{keywords}\bfseries,
+    identifierstyle=\color{black},
+    commentstyle=\color{comment}\ttfamily,
+    stringstyle=\color{string}\ttfamily,
+    showstringspaces=false,
+    showspaces=false,
+    breaklines=true,
+    showtabs=false,
+}
+
+\lstdefinelanguage{ts}{
+  keywords={
+    typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break,
+    interface,arguments,await, async,break,case,catch,class,const,continue,debugger,default,delete,do,else,enum,eval,export,extends,false,
+    finally,for,function,if,implements,import,in,instanceof,interface,let,new,null,package,private,protected,public,return,static,super,
+    switch,this,throw,true,try,typeof,var,void,while,with,yield, require, module, exports
+  },
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+}
+
+\lstdefinelanguage{json}{
+  keywords={true, false},
+  literate=
+   {:}{{{\color{comment}{:}}}}{1}
+   {,}{{{\color{comment}{,}}}}{1}
+   {\{}{{{\color{comment}{\{}}}}{1}
+   {\}}{{{\color{comment}{\}}}}}{1}
+   {[}{{{\color{comment}{[}}}}{1}
+   {]}{{{\color{comment}{]}}}}{1},
+}
+
+\lstdefinelanguage{yaml}{
+}
+
+\lstdefinelanguage{shell}{
+}
+
+% Default language
+\lstset{%
+    language=ts
+}
+
+\lstnewenvironment{code}[1][]{
+    \noindent
+    \minipage{\linewidth}
+    \vspace{0.5\baselineskip}
+    \lstset{#1}
+} {\endminipage}

@@ -19,18 +19,7 @@
 \usepackage{array}
 \usepackage{tabularx}
 
-\lstset{%
-    frame=single,
-    captionpos=b,
-    language=Typescript
-}
-
-\lstnewenvironment{code}[1][]{
-    \noindent
-    \minipage{\linewidth}
-    \vspace{0.5\baselineskip}
-    \lstset{#1}
-} {\endminipage}
+\include{source/listings}
 
 \hypersetup{%
     pdfpagemode={UseOutlines},
