@@ -181,10 +181,11 @@
     is supported, so the value of a key can be another variable, using the syntax
     shown on listing \ref{lst:env_key_syntax}.
 
-    \begin{lstlisting}[caption=Environment variable syntax, label={lst:env_key_syntax}]
+    \bigskip
+    \begin{code}[caption=Environment variable syntax, label={lst:env_key_syntax}]
 key1=${otherKey}
 key2=sample ${key1}
-    \end{lstlisting}
+    \end{code}
 
     \noindent
     Each environment is then stored under the \mbox{\textit{envs/}} directory, in
@@ -316,11 +317,12 @@ key2=sample ${key1}
     To address this operations the Restlessness CLI provides a custom deploy
     command (listing \ref{lst:rln_command_deploy}).
 
-    \begin{lstlisting}[caption=Deploy command, label={lst:rln_command_deploy}]
+    \bigskip
+    \begin{code}[caption=Deploy command, label={lst:rln_command_deploy}]
 $ restlessness deploy
 $ restlessness deploy --env production
 $ restlessness deploy --env production users
-    \end{lstlisting}
+    \end{code}
 
     It is possible to deploy the application on different environments, otherwise
     the command assume staging as the default environment.
@@ -397,9 +399,9 @@ $ restlessness deploy --env production users
     on listing \ref{lst:rln_command_new}.
 
     \bigskip
-    \begin{lstlisting}[caption=New command, label={lst:rln_command_new}]
+    \begin{code}[caption=New command, label={lst:rln_command_new}]
 $ restlessness new rln_project
-    \end{lstlisting}
+    \end{code}
 
     Once the command has finished, a new folder has been created, with a completely
     structured restlessness project, as can be see in figure
@@ -467,7 +469,7 @@ $ restlessness new rln_project
     productin the output shown on \ref{lst:rln_command_dev}.
 
     \bigskip
-    \begin{lstlisting}[caption=Dev command, label={lst:rln_command_dev}]
+    \begin{code}[caption=Dev command, label={lst:rln_command_dev}]
 $ restlessness dev locale
 $ RESTLESSNESS: Running on http://localhost:5000
 $ rln-project: offline: Starting Offline: dev/us-east-1.
@@ -475,7 +477,7 @@ $ rln-project: offline: Offline listening on http://local...
 $            * clean: rln-project-offline-dev-clean
 $ rln-project:
 $       POST | http://localhost:4000/dev/users
-    \end{lstlisting}
+    \end{code}
 
     \subsection{Resource creation}
     The Web Interface looks like in the figure \ref{fig:rln_web_interface}, and
@@ -560,7 +562,7 @@ $       POST | http://localhost:4000/dev/users
 
     \clearpage
 
-    \begin{lstlisting}[caption=handler.ts content, label={lst:handler_ts}]
+    \begin{code}[caption=handler.ts content, label={lst:handler_ts}]
 export default async (req: Request) => {
   try {
     const {
@@ -581,16 +583,16 @@ export default async (req: Request) => {
         {}, StatusCodes.InternalServerError);
   }
 };
-    \end{lstlisting}
+    \end{code}
 
     \bigskip
-    \begin{lstlisting}[caption=index.ts content, label={lst:index_ts}]
+    \begin{code}[caption=index.ts content, label={lst:index_ts}]
 export default LambdaHandler
     .bind(this, handler, validations, 'postUsers');
-    \end{lstlisting}
+    \end{code}
 
     \bigskip
-    \begin{lstlisting}[caption=validations.ts content, label={lst:validations_ts}]
+    \begin{code}[caption=validations.ts content, label={lst:validations_ts}]
 const queryStringParametersValidations =
   (): YupShapeByInterface<QueryStringParameters>  => ({});
 
@@ -603,16 +605,16 @@ export default () => ({
   payload: yup.object()
     .shape(payloadValidations()).noUnknown(),
 });
-    \end{lstlisting}
+    \end{code}
 
     \bigskip
-    \begin{lstlisting}[caption=interfaces.ts content, label={lst:interfaces_ts}]
+    \begin{code}[caption=interfaces.ts content, label={lst:interfaces_ts}]
 import { RequestI } from '@restlessness/core';
 export interface QueryStringParameters {}
 export interface Payload {}
 export interface Request extends
     RequestI<QueryStringParameters, Payload, null> {};
-    \end{lstlisting}
+    \end{code}
 
     \subsubsection{Schedules}
     \label{subsec:schedules}
@@ -644,16 +646,16 @@ export interface Request extends
     hooks.
 
     \bigskip
-    \begin{lstlisting}[caption=handler.ts content, label={lst:sched_handler_ts}]
+    \begin{code}[caption=handler.ts content, label={lst:sched_handler_ts}]
 export default async (event) => {};
-    \end{lstlisting}
+    \end{code}
 
     \bigskip
-    \begin{lstlisting}[caption=index.ts content, label={lst:sched_index_ts}]
+    \begin{code}[caption=index.ts content, label={lst:sched_index_ts}]
 import { ScheduleHandler } from '@restlessness/core';
 import handler from './handler';
 export default ScheduleHandler.bind(this, handler, 'clean');
-    \end{lstlisting}
+    \end{code}
 
     \subsection{Test}
     A test template is also provided when creating a new endpoint, and it is based
@@ -661,7 +663,7 @@ export default ScheduleHandler.bind(this, handler, 'clean');
     conjunction with the TestHandler class provided by Restlessness.
 
     \bigskip
-    \begin{lstlisting}[caption=index.test.ts template, label={lst:endopints_test_ts}]
+    \begin{code}[caption=index.test.ts template, label={lst:endopints_test_ts}]
 const postUsers = 'postUsers';
 
 beforeAll(async done => {
@@ -682,6 +684,6 @@ afterAll(async done => {
   await TestHandler.afterAll();
   done();
 });
-    \end{lstlisting}
+    \end{code}
 
 \end{chapter}

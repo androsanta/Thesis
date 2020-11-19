@@ -53,10 +53,10 @@
     (\ref{lst:auth_jwt_install}).
 
     \bigskip
-    \begin{lstlisting}[caption=auth-jwt installation, label={lst:auth_jwt_install}]
+    \begin{code}[caption=auth-jwt installation, label={lst:auth_jwt_install}]
 $ npm install @restlessness/auth-jwt
 $ restlessness add-auth @restlessness/auth-jwt
-    \end{lstlisting}
+    \end{code}
 
     \paragraph{Model creation}
     Once installed, the package automatically creates a model class, named
@@ -64,7 +64,7 @@ $ restlessness add-auth @restlessness/auth-jwt
     then be extended as needed (\ref{lst:new_model_auth}).
 
     \bigskip
-    \begin{lstlisting}[caption=A JwtSession class created by the auth-jwt package, label={lst:new_model_auth}]
+    \begin{code}[caption=A JwtSession class created by the auth-jwt package, label={lst:new_model_auth}]
 export default class JwtSession {
   ['constructor']: typeof JwtSession
   id: string
@@ -80,14 +80,14 @@ export default class JwtSession {
     return jwtSession;
   }
 };
-    \end{lstlisting}
+    \end{code}
 
     \paragraph{Model usage}
     It's then possible to create a session and generate the Jwt token, as shown
     on \ref{lst:jwt_usage}.
 
     \bigskip
-    \begin{lstlisting}[caption=User model usage, label={lst:jwt_usage}]
+    \begin{code}[caption=User model usage, label={lst:jwt_usage}]
 // Generate session and serialize it
 const session = new JwtSession();
 session.id = myId;
@@ -98,7 +98,7 @@ const serialized = session.serialize();
 // Deserialize it
 const deserialized = JwtSession.deserialize(serialized);
 console.log(deserialized.name) // --> Output: Arthur
-    \end{lstlisting}
+    \end{code}
 
     \section{Data Access Object}
     \label{sec:data_access_object}
@@ -108,11 +108,11 @@ console.log(deserialized.name) // --> Output: Arthur
     the \textit{AddOnPackage} class previously defined.
 
     \bigskip
-    \begin{lstlisting}[caption=DaoPackage class definition, label={lst:daopackage}]
+    \begin{code}[caption=DaoPackage class definition, label={lst:daopackage}]
 abstract class DaoPackage extends AddOnPackage {
     abstract modelTemplate(modelName: string): string
 }
-    \end{lstlisting}
+    \end{code}
 
     In addition to the previously defined hooks, classes implementing DaoPackage,
     should implement also the modelTemplate method, and a base dao class, to which
@@ -141,7 +141,7 @@ abstract class DaoPackage extends AddOnPackage {
     method, as shown on listing \ref{lst:model_template}.
 
     \bigskip
-    \begin{lstlisting}[caption=modelTemplate function definition, label={lst:model_template}]
+    \begin{code}[caption=modelTemplate function definition, label={lst:model_template}]
 const modelTemplate = (name: string): string => `
 import {
     MongoBase, ObjectId
@@ -155,7 +155,7 @@ export default class ${name} extends MongoBase {
     }
 };
 `;
-    \end{lstlisting}
+    \end{code}
 
     \subsubsection{Database Proxy}
     \label{subsec:database_proxy}
@@ -206,10 +206,10 @@ export default class ${name} extends MongoBase {
     (\ref{lst:dao_mongo_install}).
 
     \bigskip
-    \begin{lstlisting}[caption=dao-mongo installation, label={lst:dao_mongo_install}]
+    \begin{code}[caption=dao-mongo installation, label={lst:dao_mongo_install}]
 $ npm install @restlessness/dao-mongo
 $ restlessness add-dao @restlessness/dao-mongo
-    \end{lstlisting}
+    \end{code}
 
     \paragraph{Model creation}
     Once installed it is possible to create, from the Web Interface, models based on
@@ -219,7 +219,7 @@ $ restlessness add-dao @restlessness/dao-mongo
     methods and fields (\ref{lst:new_model})
 
     \bigskip
-    \begin{lstlisting}[caption=A new model based on the dao-mongo package, label={lst:new_model}]
+    \begin{code}[caption=A new model based on the dao-mongo package, label={lst:new_model}]
 export default class User extends MongoBase {
   ['constructor']: typeof User
   name: string
@@ -229,19 +229,19 @@ export default class User extends MongoBase {
     return 'users';
   }
 };
-    \end{lstlisting}
+    \end{code}
 
     \paragraph{Model usage}
     It's then possible to perform database operations, exploiting the abstraction
     provided by the MongoBase class, as shown on \ref{lst:user_model_usage}.
 
     \bigskip
-    \begin{lstlisting}[caption=User model usage, label={lst:user_model_usage}]
+    \begin{code}[caption=User model usage, label={lst:user_model_usage}]
 const user = new User();
 user.name = 'Andrea';
 user.age = 25;
 await user.save();
-    \end{lstlisting}
+    \end{code}
 
     \begin{figure}
         \centering

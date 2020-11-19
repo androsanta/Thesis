@@ -224,7 +224,7 @@
     as show on listing \ref{lst:handler_fun}.
 
     \bigskip
-    \begin{lstlisting}[caption=Simple serverless.yml file, label={lst:simple_sls_yml}]
+    \begin{code}[caption=Simple serverless.yml file, label={lst:simple_sls_yml}]
 org: my-company-org
 app: chat-app
 service: users
@@ -236,9 +236,9 @@ functions:
     handler: handler.usersCreate
     events:
       - http: post users/create
-    \end{lstlisting}
+    \end{code}
 
-    \begin{lstlisting}[caption=Simple handler function, label={lst:handler_fun}]
+    \begin{code}[caption=Simple handler function, label={lst:handler_fun}]
 async function usersCreate(event, context) {
   const user = {
     name: 'sample_name',
@@ -250,7 +250,7 @@ async function usersCreate(event, context) {
     body: JSON.stringify({user})
   }
 }
-    \end{lstlisting}
+    \end{code}
 
     \begin{figure}
         \begin{minipage}{\linewidth}
@@ -270,7 +270,7 @@ async function usersCreate(event, context) {
     the chosen provider, as shown on listing \ref{lst:sls_deploy}.
 
     \bigskip
-    \begin{lstlisting}[caption=Deploy command, label={lst:sls_deploy}]
+    \begin{code}[caption=Deploy command, label={lst:sls_deploy}]
 $ serverless deploy
 Serverless: Stack update finished...
 Service Information
@@ -287,7 +287,7 @@ functions:
   usersCreate: users-dev-usersCreate
 layers:
   None
-    \end{lstlisting}
+    \end{code}
 
     The deploy command creates the necessary aws resources, in this case they are:
     a lambda function corresponding to the usersCreate function and an api gateway to
@@ -299,13 +299,13 @@ layers:
     on listing \ref{lst:sls_invoke}
 
     \bigskip
-    \begin{lstlisting}[caption=Invoke command, label={lst:sls_invoke}]
+    \begin{code}[caption=Invoke command, label={lst:sls_invoke}]
 $ serverless invoke -f usersCreate
 {
     "statusCode": 200,
     "body": "{\"user\":{\"name\":\"sample_name\", ...}}"
 }
-    \end{lstlisting}
+    \end{code}
 
     The development and deploy process shown for a service with a single function
     remains the same as the service complexity grows, in particular it is possible to

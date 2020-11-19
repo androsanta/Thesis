@@ -52,11 +52,10 @@
     to explicitly mention the type of data a variable holds, as that type can change
     dynamically as change the content of the variable (\ref{lst:dynam_type}).
 
-    \bigskip
-    \begin{lstlisting}[caption=Dynamically typed variables, label={lst:dynam_type}]
+    \begin{code}[caption=Dynamically typed variables, label={lst:dynam_type}]
 let a = "Hello World!"
 a = 42
-    \end{lstlisting}
+    \end{code}
 
     This feature of the language gives a lot of flexibility to developers, however
     as the project complexity grows it can quickly become a downside.
@@ -71,9 +70,12 @@ a = 42
     Typescript can also infer variables type from their usage, reducing the effort
     needed to enable static type checking from the developer
     \cite{typescript_lang}\cite{typescript}.
+    Keeping in mind the described strengths of the JavaScript environment, has been
+    decided to use it as the main language for the development of the Restlessness
+    framework.
 
     \bigskip
-    \begin{lstlisting}[caption=Static type checking on Typescript, label={ts_static}]
+    \begin{code}[caption=Static type checking on Typescript, label={ts_static}]
 interface Student {
   name: string
   graduationYear: number
@@ -86,11 +88,7 @@ const aStudent: Student = {
 
 aStudent.graduationYear = '2020'    // Invalid
 aStudent.graduationYear = 2021      // Valid
-    \end{lstlisting}
-
-    Keeping in mind the described strengths of the JavaScript environment, has been
-    decided to use it as the main language for the development of the Restlessness
-    framework.
+    \end{code}
 
     \section{Npm}
     The strengths of the JavaScript ecosystem are further increased by the presence
@@ -123,7 +121,8 @@ aStudent.graduationYear = 2021      // Valid
     on listing \ref{lst:add_require}
 
     \bigskip
-    \begin{lstlisting}[caption=A simple \textit{package.json}, label={lst:add_module},language=json]
+    \begin{code}[caption=A simple \textit{package.json},
+        label={lst:add_module}, language=json]
 {
     "name": "add_module",
     "version": "1.0.0",
@@ -132,22 +131,22 @@ aStudent.graduationYear = 2021      // Valid
     "author": "Arthur Dent",
     "license": "ISC"
 }
-    \end{lstlisting}
+    \end{code}
 
     \bigskip
-    \begin{lstlisting}[caption=CommonJs module definition, label={lst:add_fn}]
+    \begin{code}[caption=CommonJs module definition, label={lst:add_fn}]
 // index.js
 function add(n1, n2) {
   return n1 + n2
 }
 
 module.exports = add
-    \end{lstlisting}
+    \end{code}
 
     \bigskip
-    \begin{lstlisting}[caption=CommonJs module usage, label={lst:add_require}]
+    \begin{code}[caption=CommonJs module usage, label={lst:add_require}]
 const add = require('./add.js')
-    \end{lstlisting}
+    \end{code}
 
     The Npm ecosystem has been used extensively during the development of Restlessness,
     for its dependencies and for making it available on the registry.
@@ -360,12 +359,12 @@ const add = require('./add.js')
     container, as shown on listing \ref{lst:ci_executor}:
 
     \bigskip
-    \begin{lstlisting}[caption=Reusable executor definition, label={lst:ci_executor}]
+    \begin{code}[caption=Reusable executor definition, label={lst:ci_executor}]
 executors:
   node12:
     docker:
       - image: circleci/node:12.9.1
-    \end{lstlisting}
+    \end{code}
     As previously said the framework adopt a monorepo structure, so has been necessary
     to define multiple Workflows, one for each package. Each Workflow defines two
     parallel Jobs, for testing and publishing on the Npm registry.
@@ -501,7 +500,7 @@ executors:
     grants access.
 
     \bigskip
-    \begin{lstlisting}[caption=Authorizer definition on Serverless, label={lst:sls_auth}]
+    \begin{code}[caption=Authorizer definition on Serverless, label={lst:sls_auth}]
 functions:
   auth:
     handler: auth.customAuth  # auth.js
@@ -512,7 +511,7 @@ functions:
         path: hello
         method: get
         authorizer: auth
-    \end{lstlisting}
+    \end{code}
 
     \section{React}
     An important part of the Restlessness framework is its Graphical User Interface,
@@ -539,7 +538,7 @@ functions:
     listing \ref{lst:react_example} show the definition of a React component.
 
     \bigskip
-    \begin{lstlisting}[caption= React component definition,label={lst:react_example}]
+    \begin{code}[caption= React component definition,label={lst:react_example}]
 import React from 'react';
 
 const Card = ({name}) => {
@@ -547,6 +546,6 @@ const Card = ({name}) => {
       <div>{name}</div>
   );
 };
-    \end{lstlisting}
+    \end{code}
 
 \end{chapter}
