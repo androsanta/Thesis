@@ -4,7 +4,7 @@
     tools, in order to achieve simplicity and efficiency for both development
     process and the project itself.
     In this chapter will be described the main tools used during the development
-    of Restlessness and its deployment to make its use available to everyone.
+    of Restlessness and its deployment to make it available for everyone.
 
     \section{JavaScript}
     JavaScript is a lightweight interpreted programming language. Interpreted means
@@ -16,16 +16,16 @@
     exploiting an engine directly incorporated into the Web browser, with the
     introduction of Node.js has become possible to use this language also for backend
     programming, and in general in contexts outside of the browser.
-    Node.js is a JavaScript runtime based on the V8 engine, on which the popular
-    Chrome browser is based \cite{node_org}.
+    Node.js is a JavaScript runtime based on the V8 engine, core engine of the popular
+    Chrome browser \cite{node_org}.
     A key characteristic and one of the main strength of JavaScript with respect
     to other programming languages is its asynchronous nature, that allows having
-    non-blocking I/O. As a consequence of this the code runs on a single thread,
+    non-blocking I/O. As a consequence of this, the code runs on a single thread,
     based on a LIFO queue (Last In, First Out) continuously checked by the so called
     Event Loop.
-    As shown on \ref{fig:event_loop}, operation regarding File System, Network or
-    Database access are executed separately and only once completed are inserted
-    again into the queue, to handle their result, meanwhile other queued code
+    As shown on \ref{fig:event_loop}, operations regarding File System, Network or
+    Database access are executed separately, and only once completed are inserted
+    again into the queue, to handle their result. Meanwhile other queued code
     is executed by the only present thread.
 
     \begin{figure}
@@ -50,7 +50,7 @@
 
     JavaScript is a dynamically typed language, which means that it's not necessary
     to explicitly mention the type of data a variable holds, as that type can change
-    dynamically as change the content of the variable (\ref{lst:dynam_type}).
+    dynamically as the content of the variable changes (\ref{lst:dynam_type}).
 
     \begin{code}[caption=Dynamically typed variables, label={lst:dynam_type}]
 let a = "Hello World!"
@@ -63,14 +63,14 @@ a = 42
     Typescript, a superset of JavaScript that enable static type checking.
     Being a superset, any JavaScript code is also valid Typescript code, enabling
     a gradual integration for already existing code bases.
-    The Typescript compiler is specifically a transpiler, or a compiler that take
+    The Typescript compiler is specifically a transpiler, or a compiler that takes
     source code as input and produces other source code as output, in this case
     JavaScript code. The compiler will point the errors it encounters, but it does
     not prevent the code to be run, hence it behaves like a spellchecker for the code.
     Typescript can also infer variables type from their usage, reducing the effort
     needed to enable static type checking from the developer
     \cite{typescript_lang}\cite{typescript}.
-    Keeping in mind the described strengths of the JavaScript environment, has been
+    Keeping in mind the described strengths of the JavaScript environment, it has been
     decided to use it as the main language for the development of the Restlessness
     framework.
 
@@ -92,8 +92,8 @@ aStudent.graduationYear = 2021      // Valid
 
     \section{Npm}
     The strengths of the JavaScript ecosystem are further increased by the presence
-    of Npm, shorthand for Node Package Manager, which is the official package Manager
-    for Node.js. Npm rely on the commonjs modules specification \cite{common_js},
+    of Npm, shorthand for Node Package Manager, which is the official package manager
+    for Node.js. Npm rely on the CommonJs modules specification \cite{common_js},
     which defines a convention for the JavaScript module ecosystem.
     The main components of Npm are:
     \begin{itemize}
@@ -105,7 +105,7 @@ aStudent.graduationYear = 2021      // Valid
         \item \textit{package.json}: a configuration file, in the Json format
             \cite{jsoniso}, that must be present for both modules that are published
             into the registry and modules that use other modules from the registry
-            as dependencies. It contains projects information, such as name and
+            as dependencies. It contains projects informations, such as name and
             version, and a list of other modules, on which the project depends on.
         \item \textit{node\_modules}: an automatically created folder that contains
             all the projects dependencies. At runtime Node.js looks for modules
@@ -174,7 +174,7 @@ const add = require('./add.js')
     The main concepts introduced by Git are:
     \begin{itemize}
         \item Commit: the main unit representing content modification.
-        \item Branches: allows working simultaneously at the codebase, making
+        \item Branches: allow working simultaneously at the codebase, making
             different modifications.
         \item Push/Pull: operations that allow synchronization between the remote
             repository and the local one.
@@ -213,7 +213,7 @@ const add = require('./add.js')
     on collaboration, as it is possible to comment and discuss about the Issue with
     other collaborators, also referencing other resources, which can be other Issues
     or code sections.
-    As the project grows so does the number of Issues, and so become important to
+    As the project grows so does the number of Issues, and so it becomes important to
     keep them organized. This is made possible by using Labels and Milestones.
     Both allow to group Issues according to a common characteristic, but with a
     different granularity \cite{github_issues}.
@@ -234,7 +234,7 @@ const add = require('./add.js')
     \end{itemize}
     The latter instead group together Issues linked together from a temporal point
     of view, typically a version release or a planned Sprint if following the agile
-    methodology \cite{agile}. With the Restlessness framework has been opted for
+    methodology \cite{agile}. With the Restlessness framework it has been opted for
     the first option.
 
 
@@ -255,13 +255,13 @@ const add = require('./add.js')
     \subsubsection{Pull Requests}
     An important process when multiple developers collaborate on a single project
     are code reviews, as having project's modification verified by more than one
-    person reduces the risk for finding bugs, typos and critical problems later.
-    Pull Requests are a feature of Github that enable this process, with it a
-    collaborator proposes its changes while another one accept or reject the request.
+    person reduces the risk of finding bugs, typos and critical problems later.
+    Pull Requests are a feature of Github that enable this process. With it a
+    collaborator proposes its changes while another one accepts or rejects the request.
     It is possible to discuss on the specific request, referencing other resources,
     commenting on code or requesting modification on the proposed changes, as it
     happens for Issues.
-    When a Pull Request is created the author chose a target branch on which to
+    When a Pull Request is created the author chooses a target branch on which to
     integrate its proposed changes, and once the request is accepted those changes
     are merged into the target branch, and the Pull Request is considered closed,
     as shown on figure \ref{fig:rln_pull_request}.
@@ -275,7 +275,7 @@ const add = require('./add.js')
 
     \subsubsection{Projects}
     Projects is a recently added Github feature with the purpose of further improve
-    organizing and distributing tasks and work. From the Projects page is possible
+    organizing and distributing tasks and work. From the Projects page it is possible
     to define custom columns in which assign different tasks, which can be Issues,
     Pull Requests or simple Notes. As shown in figure \ref{fig:rln_project_board},
     for Restlessness has been defined tree columns: \textit{To do},
@@ -313,7 +313,8 @@ const add = require('./add.js')
     maintenance. Moreover once set, the CI process does not add any overhead to
     the development as it is completely automated.
     The CI approach is oftentimes related to another approach, which is the
-    Continuous Delivery, defined as
+    Continuous Delivery, defined as:
+
     \enquote*{%
         Continuous Delivery (CD) is a software engineering approach in which teams
         keep producing valuable software in short cycles and ensure that the
@@ -335,28 +336,29 @@ const add = require('./add.js')
         \label{fig:circle_ci_structure}
     \end{figure}
 
+    \noindent
     The main concepts introduced by the platform are:
     \begin{itemize}
         \item Configuration: All processes are orchestrated through a single file
-            called \textit{config.yml}, in the \href{https://yaml.org/}{Yaml} format,
-            and placed under a folder called \textit{.circleci} at the root of the
-            project.
+            called \mbox{\textit{config.yml}}, in the \href{https://yaml.org/}{Yaml}
+            format, and placed under a folder called \textit{.circleci} at the root
+            of the project.
         \item Orbs: Reusable snippets of code that help automate repeated processes
         \item Jobs: Building blocks of the configuration file, they are a collection
             of steps, which run commands or scripts as specified. Each Job is run
             in a unique executor.
-        \item Executor: The container or Virtual Machine where running each Job.
+        \item Executor: The container or Virtual Machine that run each Job.
             It is possible to chose between \href{https://www.docker.com/}{Docker}
             containers, Virtual Machines running Linux, Windows or MacOS.
         \item Steps: Actions that need to be taken to complete a Job. It can be
             any kind of executable command.
-        \item Workflows: They define a list of Jobs and their run order, and
+        \item Workflows: They define a list of Jobs with their run order, and
             concurrency.
     \end{itemize}
 
     For the Restlessness development has been chosen the popular containerization
-    solution \href{https://www.docker.com/}{Docker}, in particular a Node.js based
-    container, as shown on listing \ref{lst:ci_executor}:
+    solution called \href{https://www.docker.com/}{Docker}, in particular a Node.js
+    based container, as shown on listing \ref{lst:ci_executor}:
 
     \bigskip
     \begin{code}[caption=Reusable executor definition, label={lst:ci_executor},
@@ -366,9 +368,10 @@ executors:
     docker:
       - image: circleci/node:12.9.1
     \end{code}
-    As previously said the framework adopt a monorepo structure, so has been necessary
-    to define multiple Workflows, one for each package. Each Workflow defines two
-    parallel Jobs, for testing and publishing on the Npm registry.
+
+    As previously said the framework adopt a monorepo structure, so it has been
+    necessary to define multiple Workflows, one for each package. Each Workflow
+    defines two parallel Jobs, for testing and publishing on the Npm registry.
     Figure \ref{fig:ci_workflow_diagram} show the described structure for two Restlessness
     packages, and it is possible to notice that each Job run in its own container,
     in parallel and independently from the others
@@ -386,7 +389,7 @@ executors:
         \item \textit{install\_packages}: Install dependencies as specified by the
             \textit{package.json}.
         \item \textit{deps\_and\_tests}: Install dependencies and run tests as
-            specified by the \textit{package.json}.
+            specified by the \mbox{\textit{package.json}}.
         \item \textit{npm\_publish}: Publish the package on the Npm registry.
     \end{itemize}
 
@@ -394,14 +397,14 @@ executors:
     manually by performing a git tag on a specific repository commit, following the
     format: package name, followed by \textit{/v} and the semantic version of the
     package (e.g. \textit{@restlessness/core/v1.0.2}). A custom script takes care
-    of extractive the version information and set it on the correct \textit{package.json},
-    where is read from the npm publish command.
+    of extracting the version information and setting it on the correct
+    \textit{package.json}, where is read from the npm publish command.
 
-    Although CircleCi offers its own website from which is possible to check Workflow
+    Although CircleCi offers its own website from which is possible to check Workflows
     execution, errors and details of every operation, it offers also a Github plugin,
     that is able to show Workflows result directly on commits or Pull Requests, as
     shown on \ref{fig:ci_github_integration}. The integration between the two
-    services has simplified the development workflow of Restlessness, and adds to
+    services has simplified the development workflow of Restlessness, and it adds to
     the already described advantages of adopting a CI/CD approach.
 
 
@@ -415,7 +418,7 @@ executors:
 
     \section{AWS}
     Amazon Web Services is a cloud platform offered by \textit{Amazon.com, Inc}
-    which, between its various services, also provides serverless computing options.
+    which, among its various services, also provides serverless computing options.
     Although one of the purpose of using the Serverless Framework is to abstract
     the underlying infrastructure details of the platform, those details are needed
     to develop a framework such as Restlessness, that has to interact with the
@@ -427,9 +430,9 @@ executors:
         \item Lambda: The compute service providing the serverless functionalities.
             A Lambda function contains the code written by the developer.
         \item API Gateway: A service that creates a connection point between
-            external requests and other internal services, such as a Lambda function.
+            external requests and other internal services, such as a Lambda functions.
         \item S3: Acronym for Simple Storage Service, provides object storage.
-            Resources are organized in container called Buckets.
+            Resources are organized in containers called Buckets.
         \item CloudFormation: A service that allow to model infrastructure as code.
             Each CloudFormation configuration corresponds to a resource called
             CloudFormation Stack, containing the description of other resources,
@@ -442,8 +445,8 @@ executors:
 
     \subsubsection{Resource creation during deploy}
     During the deployment of a Serverless service the user code and its dependencies
-    are packaged into a zip artifact, then begin the remote resource creation of
-    a CloudFormation Stack and an S3 Bucket. One that resources initialization has
+    are packaged into a zip artifact. It then begins the remote resource creation of
+    a CloudFormation Stack and an S3 Bucket. Once that resources initialization has
     been completed, the CloudFormation configuration and the zip artifact are uploaded
     and saved into the S3 Bucket and that operation is followed by the creation of
     all resources defined on the CloudFormation Stack. Those operations are shown
@@ -489,7 +492,7 @@ executors:
     \end{figure}
 
     The API Gateway forward the request to the specified Lambda Authorizer, that
-    checks the caller's identity and generate an Authentication Policy, which is
+    checks the caller's identity and generates an Authentication Policy, which is
     an object that states which resources the user is authorized to access.
     The Policy is then cached to improve performance on subsequent requests, and
     if it the access request is granted, the flow proceed as in the previously
@@ -520,7 +523,7 @@ functions:
     which is the main interaction point for the user. The Frontend development,
     specifically toward Web Interfaces, can count on the presence of several
     libraries and frameworks based on the JavaScript language. For the development
-    of Restlessness has been chosed the popular library React, due to its simplicity,
+    of Restlessness it has been chosed the popular library React, due to its simplicity,
     and effectiveness.
 
     React is an Open Source JavaScript library that implements the concept of
@@ -533,7 +536,7 @@ functions:
     the screen. After those virtual DOM updates are created using the React api,
     the new istance of the virtual DOM is compared to the previous one, allowing
     to reflect the update on the real DOM only for the elements that actually
-    change. The library allow to create a structure based on reusable component,
+    change. The library allows to create a structure based on reusable component,
     obtaining a scalable structure, and is particularly suited for SPA (Single
     Page Applications) \cite{react_js}.
     The library also introduced a new syntax, named JSX (JavaScript XML), and

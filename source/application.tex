@@ -16,7 +16,7 @@
     The project Spazio alla scuola aims to provide a concrete support to school
     leaders for lecture resumption on September 2020, given the health situation on the
     country due to the SARS-CoV-2 pandemic.
-    The platform offer tools to verify capacity of classroom and other school spaces,
+    The platform offers tools to verify capacity of classroom and other school spaces,
     to plan classrooms flows and staggering, in compliance with the distancing measures.
     The platform is provided as a free service and is available at the address
     \url{www.spazioallascuola.it} \cite{spazio_alla_scuola}.
@@ -32,10 +32,10 @@
     \begin{itemize}
         \item Code: the project's code is uploaded in a zip archive, so it needs to
             be downloaded and extracted.
-        \item Extensions: aws allow associate extensions to a lambda function, to
+        \item Extensions: AWS allows to associate extensions to a lambda function, to
             integrate it with custom monitoring, security or other tools.
         \item Runtime: bootstrap operation for the chosen runtime environment,
-            it is also possible to provides a custom runtime if needed.
+            it is also possible to provide a custom runtime if needed.
         \item Function: code written by the developer, it can perform some resource
             initialization, such as creating a database connection.
     \end{itemize}
@@ -47,8 +47,8 @@
         \label{fig:aws_lambda_lifecycle}
     \end{figure}
 
-    The Cold start refers exactly to this Init phase and represent an overhead to the
-    function execution, however once this phase is completed the function is ready,
+    The Cold start refers exactly to this Init phase and it represents an overhead to the
+    function execution. However once this phase is completed the function is ready,
     and subsequent invocations will not suffer from it. Then after some times without
     receiving any events, usually in the order of 5 to 20 minutes, the platform performs
     the Shutdown phase, so any following event causes the process to start again from
@@ -78,7 +78,7 @@
     This way the Cold start effect remains present, but the end user of the api does
     not experience it.
 
-    It as been decided to make this plugin an integral part of the Restlessness framework,
+    It has been decided to make this plugin an integral part of the Restlessness framework,
     granting out of the box support for it. From the Web Interface is possible to
     enabled or disable the warmup on the single endpoint, since not all functions may
     need it.
@@ -107,15 +107,15 @@
     Although the problem has been amplified by the introduction of the warmup plugin
     integration, it remains a critical issue for application that rely on the high
     scalability of the serverless platform.
-    To address this problem on its relational databases, Aws rely on the usage of a
+    To address this problem on its relational databases, AWS rely on the usage of a
     proxy between the functions and the database. Exploiting the concept of a proxy,
-    has been decided to approach the problem in the same way, since a solution for
+    it has been decided to approach the problem in the same way, since a solution for
     for the mongo database does not exist at the moment.
-    Restlessness already provides the package @restlessness/dao-mongo, as described on
-    section \ref{sec:data_access_object}, defining an abstraction level over the
-    mongodb driver, so it was possible to include a proxy without changing the
-    exposed methods for the users.
-    Has been decided to develop an open source plugin, named
+    Restlessness already provides the package \textit{@restlessness/dao-mongo}, as
+    described on section \ref{sec:data_access_object}, defining an abstraction level
+    over the mongodb driver, so it was possible to include a proxy without changing
+    the exposed methods for the users.
+    It has been decided to develop an open source plugin, named
     \href{https://github.com/getapper/serverless-mongo-proxy}{serverless-mongo-proxy},
     to provide the proxy functionality, independently from the Restlessness framework,
     as shown on \ref{subsec:database_proxy}.
@@ -124,9 +124,9 @@
 
     \section{Micro services}
     \label{subsec:application_micro_services}
-    During the deployment of an application on the Aws platform a number of resources
-    are created for each function, to provides services such as logging, api gateway
-    for http events, permissions and others functionalities. The Aws platform has a
+    During the deployment of an application on the AWS platform a number of resources
+    are created for each function, to provides services such as logging, API Gateway
+    for http events, permissions and others functionalities. The AWS platform has a
     threshold of maximum 200 resources definable for each service
     (\ref{subsec:sls_disadvantage}), and since for each function there are about 10
     resources associated, it follows that each service can define about 20 functions.
@@ -135,7 +135,7 @@
     low complexity services.
     So the next step in the Restlessness framework development has been to switch
     between the management of a single service, to a multitude of services, under
-    the same Restlessness project. With this approach has been possible to split
+    the same Restlessness project. With this approach it has been possible to split
     the functions of the project Spazio alla scuola into multiple services, obtaining
     a more fine grained separation between its logic components.
 

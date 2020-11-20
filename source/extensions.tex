@@ -25,6 +25,7 @@
         algorithm) or a public/private key pair using RSA or ECDSA.%
     } \cite{json_web_token}
 
+    \noindent
     In its compact form, the token consist of three parts separated by dots,
     which are:
     \begin{itemize}
@@ -34,15 +35,15 @@
             part of the token.
         \item Payload: It contains the claims, which are statements about an entity,
             which usually is the user, plus any additional data. Also this JSON
-            object is then Base64url encoded, and form the second part of the token.
+            object is then Base64url encoded, and it forms the second part of the token.
         \item Signature: The third part is the signature obtained by signing the
-            already created part (Header and Payload separated by a dot) with a
+            already created parts (Header and Payload separated by a dot) with a
             secret.
     \end{itemize}
-    The final output are three Base64url strings, separated by dots, that can be
-    easily passed in an Http environment. In the case of the Jwt Authorizer function
-    it will be included in the requests in the \textit{Authorization} header,
-    with type \textit{Bearer}.
+    The final output is composed by three Base64url strings, separated by dots,
+    that can be easily passed in an Http environment. In the case of the Jwt
+    Authorizer function it will be included in the requests in the
+    \textit{Authorization} header, with type \textit{Bearer}.
 
     \subsection{Usage example}
     The package can be used on a Restlessness project following this steps:
@@ -93,9 +94,11 @@ const session = new JwtSession();
 session.id = myId;
 session.name = 'Arthur';
 session.permissions = [];
+// Once serialized, the session can be
+// easily returned to the user
 const serialized = session.serialize();
 
-// Deserialize it
+// Deserialize the session
 const deserialized = JwtSession.deserialize(serialized);
 console.log(deserialized.name) // --> Output: Arthur
     \end{code}
@@ -124,7 +127,7 @@ abstract class DaoPackage extends AddOnPackage {
     Restlessness already provides a Dao package for the popular non relational
     database \href{https://www.mongodb.com/}{mongodb}, and it's available on the
     npm platform as \mbox{\textit{@restlessness/dao-mongo}}.
-    That package exports two main components, an implementation of the DaoPackage
+    That package exports two main components: an implementation of the DaoPackage
     class, and a MongoBase class, the base class containing the main Dao
     functionalities for CRUD operations, as shown on listing \ref{fig:mongobase}.
 
@@ -137,8 +140,8 @@ abstract class DaoPackage extends AddOnPackage {
 
     Users of the package can then create models based on the MongoBase class through
     the Restlessness Web Interface.
-    The creation of that model is made possible by implementing the DaoPackage.modelTemplate
-    method, as shown on listing \ref{lst:model_template}.
+    The creation of that model is made possible by implementing the
+    \textit{DaoPackage.modelTemplate} method, as shown on listing \ref{lst:model_template}.
 
     \bigskip
     \begin{code}[caption=modelTemplate function definition, label={lst:model_template}]
@@ -184,7 +187,7 @@ export default class ${name} extends MongoBase {
         \caption{Mongo proxy structure}
     \end{figure}
 
-    To implement this structure has been developed a serverless plugin, named
+    To implement this structure it has been developed a serverless plugin, named
     \href{https://www.npmjs.com/package/serverless-mongo-proxy}{serverless-mongo-proxy},
     and usable independently of the Restlessness framework.
     The plugin automatically creates the serverless proxy function in the specified

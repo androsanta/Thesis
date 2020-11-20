@@ -44,11 +44,11 @@
     \begin{itemize}
         \item Restlessness core: core package of the framework, it contains all the
             classes and functions that provides the framework functionalities. It is
-            available as \mbox{@restlessness/core} package on npm.
+            available as \mbox{\textit{@restlessness/core}} package on npm.
         \item Command Line Interface: together with the Web Interface, this is the
             main component with which users interact the most. It depends on the
             core package to provide its functionalities, and it is available as
-            the \mbox{@restlessness/cli} package on npm.
+            the \mbox{\textit{@restlessness/cli}} package on npm.
         \item Restlessness backend: api service running locally, created with the
             Restlessness framework itself. It is used by the Web Interface to
             provides its functionalities.
@@ -79,8 +79,8 @@
             They can be associated to a Dao package, which provides its own model
             creation template.
         \item Envs: environment files, used to store information in key/value format,
-            from both the user and the framework and its extensions.
-        \item Services: Serverless services.
+            from both the user and the framework with its extensions.
+        \item Services: Serverless services (i.e. \textit{serverless.json}).
     \end{itemize}
 
     The framework allows the creation of those resources and needs to save that
@@ -88,7 +88,7 @@
     of configuration files, one for each resource type, and store them under the
     \textit{config/} directory, in JSON format \cite{json_iso}.
     It has been decided to format all configuration files across the project using JSON,
-    preferred to alternatives, such as Yaml, to simplify their handling and modification
+    preferring it to alternatives, such as Yaml, to simplify their handling and modification
     by the framework, given that Typescript handle JSON files and objects natively.
     Given the similar structure between those files, a single abstract class models
     it, while subclasses implement specific behaviors, following the structure
@@ -107,7 +107,7 @@
 
     Resources created through Restlessness need to find a correspondence on the
     Serverless configuration file (\textit{serverless.yml} or \textit{serverless.json}).
-    Moreover has been decided to let the framework manage more than one service at
+    Moreover it has been decided to let the framework manages more than one service at
     a time associated to the same application or project, due to a platform limitation,
     as described on \ref{subsec:application_micro_services}.
     The structure adopted by the framework is to save the configuration file of
@@ -122,7 +122,7 @@
     Figure \ref{fig:api_gateway_multiple_services} shows that sharing the API
     Gateway results in the user having to interact with a single endpoint.
     Other shared resources may be simple functions or authorizers.
-    The other framework defined service, named \textit{offline}, is require for
+    The other framework defined service, named \textit{offline}, is required for
     local development, and it contains the resource definition of all services,
     that will be read from the serverless-offline plugin, as described on
     \ref{sec:local_dev}. Restlessness manages the synchronization between
@@ -150,7 +150,7 @@
         \label{fig:api_gateway_multiple_services}.
     \end{figure}
 
-    The \textit{JsonServices} class manage all operations regarding the Serverless
+    The \textit{JsonServices} class manages all operations regarding the Serverless
     services files, with the main ones being: offering CRUD methods for the various
     resources, such as: services; functions, with http or schedule events;
     serverless plugins; authorizer functions, associated to a single service or a
@@ -165,8 +165,9 @@
     It has been decided to handle those information with different environment files,
     storing environment variables.
     When a project is created the framework generates 4 different environments: locale,
-    test, staging and production. Each environment has an associated type and stage.
-    The type represent the purpose of that environment, below are the available types:
+    test, staging and production. Each environment has an associated type and stage,
+    with the first representing the purpose of that environment, and the latter the
+    corresponding Serverless stage. Below are the available types:
     \begin{itemize}
         \item test: environments used only for testing, which can happen locally
             but also through CI platform.
@@ -177,9 +178,9 @@
     configuration file \textit{config/envs.json} and are managed by the JsonEnvs
     class.
 
-    Environment variables are stored in the format key=value and variable expansions
-    is supported, so the value of a key can be another variable, using the syntax
-    shown on listing \ref{lst:env_key_syntax}.
+    Environment variables are stored in the format \textit{key=value} and variable
+    expansions is supported, so the value of a key can be another variable, using
+    the syntax shown on listing \ref{lst:env_key_syntax}.
 
     \bigskip
     \begin{code}[caption=Environment variable syntax, label={lst:env_key_syntax}]
@@ -226,18 +227,18 @@ key2=sample ${key1}
 
     \subsubsection{Handlers}
     The Core package provides different functions and classes to simplify some
-    operations and to provides additional functionalities on top of the Serverless
+    operations and to provide additional functionalities on top of the Serverless
     framework.
 
     \paragraph{LambdaHandler} is a core function, reserved to be used for function
     associated with an http event. Its purpose is to parse the request payload and
     or query parameters, load the environment variables and execute the lifecycle
-    hooks of the installed addons. After those operation the LambdaHandler execute
+    hooks of the installed addons. After those operations the LambdaHandler executes
     the actual handler function associated for the endpoint.
 
     \paragraph{ScheduleHandler} behaves similarly to LambdaHandler, but it is
     reserved for functions with an associated schedule event, hence it is simpler.
-    Its only tasks to execute lifecycle hooks and the actual handler function.
+    Its only tasks are to execute lifecycle hooks and the actual handler function.
 
     \paragraph{ResponseHandler} is a class providing static methods for generating
     response object for http endpoints. The response can be created using a JSON
@@ -266,13 +267,13 @@ key2=sample ${key1}
     The local development requires the presence of different processes, which are:
     the Api service and the Web Interface provided by Restlessness and also the
     project's process, to be able to test in real time the defined functions. The
-    CLI handles those 3 processes through the dev command.
-    In particular, both the project's process and Restlessness backend, are executed
-    using the Serverless plugin serverless-offline, which allow simulating an api
-    gateway, effectively creating a local http server.
+    CLI handles those 3 processes through the dev command. In particular, both the
+    project's process and Restlessness backend, are executed using the Serverless plugin
+    \href{https://www.npmjs.com/package/serverless-offline}{serverless-offline},
+    which allows simulating an api gateway, effectively creating a local http server.
     Instead for the frontend process it has been used the npm package
     \href{https://www.npmjs.com/package/serve}{serve}, through which is possible
-    to create an http server that serve static files.
+    to create an http server that serves static files.
     Furthermore, the dev command takes care of executing those processes following the
     dependency order, which is: Restlessness backend, frontend and finally the
     project's process.
@@ -332,9 +333,9 @@ $ restlessness deploy --env production users
     Since the deploy operation involves more than one service, it's important that
     the information among them are consistent, especially when deploying. This is
     why the deploy command, under the hood, takes care of performing this check,
-    with a method from the JsonServices class, named \textit{healthCheck}.
+    with a method from the \textit{JsonServices} class, named \textit{healthCheck}.
     In particular, it checks that the various services belong to the same serverless
-    organization and organization, the same aws deploy region, and that do not exist
+    organization and organization, the same AWS deploy region, and that do not exist
     services with functions associated to the same path. The latter is due to the fact
     that the services use a shared api gateway.
 
@@ -346,7 +347,7 @@ $ restlessness deploy --env production users
     The Restlessness backend provides the endpoints used by the frontend to show,
     create, update and delete the framework resources described previously.
     It has been created with the Restlessness framework itself and it relies on
-    the \mbox{\textit{@restlessness/core}} package to provides its functionalities.
+    the \mbox{\textit{@restlessness/core}} package to provide its functionalities.
     It is run locally using the
     \href{https://www.npmjs.com/package/serverless-offline}{serverless-offline}
     plugin, resulting in a lightweight Api Service.
@@ -443,12 +444,12 @@ $ restlessness new rln_project
     \begin{itemize}
         \item .eslintrc.json: configuration file of the linter
             \href{https://eslint.org/}{eslint}.
-        \item .gitignore: list intentionally ignored files from the git tracking
+        \item .gitignore: it lists intentionally ignored files from the git tracking
             system.
         \item package.json: entry point of every npm project, it lists the project
             dependencies, as well as other project related information, such as
             the project name and version.
-        \item package-lock.json: npm generated file, contains a snapshot of the
+        \item package-lock.json: npm generated file, it contains a snapshot of the
             version of all dependencies, with the goal of obtaining reproducible
             builds.
         \item tsconfig.json: configuration file for the Typescript compiler.
@@ -466,7 +467,7 @@ $ restlessness new rln_project
     \label{sec:local_dev}
 
     The \textit{dev} command starts the processes as described on \ref{dev_command},
-    productin the output shown on \ref{lst:rln_command_dev}.
+    producing the output shown on \ref{lst:rln_command_dev}.
 
     \bigskip
     \begin{code}[caption=Dev command, label={lst:rln_command_dev}, language=shell]
@@ -524,9 +525,9 @@ $       POST | http://localhost:4000/dev/users
     \end{figure}
 
     During the endpoint creation, the framework takes care of saving the provided
-    information on the configuration file config/endpoints.json, and to create code
-    template for the development of the corresponding function.
-    As shown on figure \ref{fig:new_endpoint_folder_structure}, has been created a
+    information on the configuration file \textit{config/endpoints.json}, and to
+    create code template for the development of the corresponding function.
+    As shown on figure \ref{fig:new_endpoint_folder_structure}, it has been created a
     folder under src/endpoints, using the notation http method plus normalized value
     of the http path.
 
@@ -550,15 +551,16 @@ $       POST | http://localhost:4000/dev/users
         \label{fig:new_endpoint_folder_structure}
     \end{figure}
 
-    The developer can then code the function in handler.ts, which already contains a
-    template (listing \ref{lst:handler_ts}) and define the validation object in
-    validations.ts (listing \ref{lst:validations_ts}).
+    The developer can then code the function on the \textit{handler.ts} file, which
+    already contains a template (listing \ref{lst:handler_ts}) and define the
+    validation object in \textit{validations.ts} (listing \ref{lst:validations_ts}).
     It is also possible to exploit the Typescript functionalities, defining the various
     interface for the request, response and query parameters objects, all under the
     interfaces.ts file (listing \ref{lst:interfaces_ts}).
     The actual function entry point that will be executed once deployed is defined
-    in the file index.ts (listing \ref{lst:index_ts}). This function is created binding
-    the function LambdaHandler input with the handler function and validation object.
+    in the file \textit{index.ts} (listing \ref{lst:index_ts}). This function is
+    created binding the function LambdaHandler input with the handler function and
+    validation object.
 
     \clearpage
 
@@ -620,8 +622,9 @@ export interface Request extends
     \label{subsec:schedules}
     Schedules are serverless functions that are triggered by a programmed event.
     By creating a Schedule from the Web Interface the framework creates the necessary
-    template files under src/schedules as shown on \ref{fig:new_schedule_folder_structure},
-    and also save the provided information under the config/schedules.json file.
+    template files under \textit{src/schedules} as shown on
+    \ref{fig:new_schedule_folder_structure}, and also saves the provided information
+    under the \textit{config/schedules.json} file.
 
     \begin{figure}
         \begin{minipage}{\linewidth}
@@ -639,8 +642,8 @@ export interface Request extends
     \end{figure}
 
     The structure of the template files is similar to the one generated for endpoints,
-    but simpler. The handler.ts file contains the function that the developer has
-    to code, while the index.ts file is the entry point.
+    but simpler. The \textit{handler.ts} file contains the function that the developer
+    has to code, while the \textit{index.ts} file is the entry point.
     The core function ScheduleHandler is used to wrap the handler function, the same
     way as happens for endpoints, with the purpose of executing the framework lifecycle
     hooks.

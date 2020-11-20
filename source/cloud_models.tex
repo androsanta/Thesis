@@ -134,9 +134,10 @@
     of course still required, but they are transparent to developers, which can focus
     on smaller pieces of code.
     With this model, rather than over purchase the resources, to ensure correct
-    functionality in all workload situations, as happens in the IaaS model, the vendor
-    charges for the actual usage, as the service is auto-scaling. Thanks to this approach
-    consumer costs will be fine grained as shown in \ref{fig:serverless_benefits}.
+    functionality in all workload situations, as happens in the IaaS model, the
+    customer is charged by the vendor for the actual usage, as the service is
+    auto-scaling. Thanks to this approach consumer costs will be fine grained as
+    shown in \ref{fig:serverless_benefits}.
 
     \begin{figure}
         \centering
@@ -155,8 +156,9 @@
     as a Service (FaaS), which allows developers to write and update pieces of code
     on the fly, typically a single function.
     Such code is then executed in response to an event, usually an api call, but other
-    options are possible, so it executed regardless of the events, and this lead to
-    the previously described benefit regarding scalability and cost effectiveness.
+    options are possible, and with more events, more functions are execture. Instead,
+    in absence of events, no code is executed thus leading to the previously described
+    benefit regarding scalability and cost effectiveness.
     Furthermore, through this model turns out to be more efficient to implement web
     applications using the modular approach of the micro services architecture
     (\ref{fig:monolithic_to_microservices}), since the code is organized as a set of
@@ -174,38 +176,38 @@
     this case developers have less control on the system, and an increased complexity when it
     comes to test the application in a local environment.
 
-    The first cloud provider to move into the FaaS director has been Amazon, with the
-    introduction of aws lambda in 2014, followed by microsoft and google, with
-    azure function and cloud function respectively in 2016.
+    The first cloud provider to move into the FaaS direction has been Amazon, with
+    the introduction of AWS Lambda in 2014, followed by Microsoft and Google, with
+    Azure Functions and Cloud Functions respectively in 2016.
 
     \section{Serverless Framework}
     \label{sec:serverless_framework}
-    Shortly after the release of the service Aws lambda functions, has been introduced,
-    in 2015, the Serverless framework, with the main objective of making development,
-    deploy and troubleshoot serverless applications with the least possible overhead.
-    The framework consists of an open source Command Line Interface and a hosted
+    Shortly after the release of the service AWS Lambda functions, has been introduced,
+    in 2015, the Serverless Framework, with the main objective of making development,
+    deploy and troubleshoot of serverless applications with the least possible overhead.
+    The framework consists of an Open Source Command Line Interface and a hosted
     dashboard, that combined provide developers with serverless application lifecycle
-    management. Serverless supports all runtime provided by Aws, corresponding to
+    management. Serverless supports all runtime provided by AWS, corresponding to
     the most popular programming languages such as: Node.js, Python, Ruby, Java,
-    Go, .Net, and others are on development.
+    Go, .Net, and with others on development.
 
-    Although the serverless framework, given the number of cloud providers supported,
-    aim to be platform agnostic, the following examples will be based on the Aws
+    Although the Serverless Framework, given the number of cloud providers supported,
+    aim to be platform agnostic, the following examples will be based on the AWS
     provider and on the Node.js programming language.
 
     The main work units of the framework, according to the FaaS model, are the functions.
     Each function is responsible for a single job, and although is possible to perform
     multiple tasks using a single function, it's not recommended as stated by the
     design principle Separation of concerns \cite{separation_of_concerns}.
-    Each function is executed only when triggered by and Event, which can be of different
+    Each function is executed only when triggered by an Event, which can be of different
     type, such as: http api request, scheduled execution and image or file upload.
     Once the developer has defined the function and the events associated to it,
-    the framework take care of creating the necessary resources on the provider platform.
+    the framework takes care of creating the necessary resources on the provider platform.
 
     The framework introduces the concept of Services as unit of organization. Each
     service has one or more functions associated to it and an application can then
     be composed by multiple services. This structure reflects the modular approach
-    of the micro services architecture described previously. Finally various applications
+    of the micro services architecture described previously. Finally, various applications
     are grouped under an organization (\ref{fig:sls_resource_scheme})
 
     \begin{figure}
@@ -220,8 +222,8 @@
     Below is a simple serverless.yml file (listing \ref{lst:simple_sls_yml}), it
     defines the service users, which contains just a function, responsible of creating
     a user. The handler field specify the path to the function code, in this case
-    the framework will search for a handler.js file, exporting a usersCreate function,
-    as show on listing \ref{lst:handler_fun}.
+    the framework will search for a \textit{handler.js} file, exporting a
+    \textit{usersCreate} function, as show on listing \ref{lst:handler_fun}.
 
     \bigskip
     \begin{code}[caption=Simple serverless.yml file,
@@ -290,11 +292,11 @@ layers:
   None
     \end{code}
 
-    The deploy command creates the necessary aws resources, in this case they are:
-    a lambda function corresponding to the usersCreate function and an api gateway to
-    handle http requests.
+    The deploy command creates the necessary AWS resources, in this case they are:
+    a Lambda function corresponding to the \textit{usersCreate} function and an
+    api gateway to handle http requests.
     It is then possible to test the newly created resource by making requests to the
-    url returned by the CLI, specifying the resource path /users/create.
+    url returned by the CLI, specifying the resource path \textit{/users/create}.
     It is possible to invoke online functions also directly from the CLI,
     specifying the identifier of the function used in the serverless.yml file, as shown
     on listing \ref{lst:sls_invoke}
@@ -315,7 +317,7 @@ $ serverless invoke -f usersCreate
     This process gets along with the previously described micro services architecture.
 
     \subsection{Advantages}
-    The main advantages of using the Serverless framework are:
+    The main advantages of using the Serverless Framework are:
     \begin{itemize}
         \item Provider agnostic: the framework aims to be independent from the chosen
             cloud provider, thus avoiding vendor lock-in. In practice this feature is
@@ -323,10 +325,10 @@ $ serverless invoke -f usersCreate
             different across providers. However the main structure remains the same,
             and that simplify providers migration.
         \item Simplified development: the CLI commands simplify the development process,
-            from the deploy from the testing of the deployed functions.
-        \item Extensible: is possible to develop plugins that integrate with the
+            from the deploy to the testing of the deployed functions.
+        \item Extensible: it is possible to develop plugins that integrate with the
             CLI commands lifecycle, increasing their functionalities.
-        \item Dashboard: the hosted dashboard allow monitoring and tracing of the
+        \item Dashboard: the hosted dashboard allows monitoring and tracing of the
             deployed functions and services.
     \end{itemize}
 
@@ -342,7 +344,7 @@ $ serverless invoke -f usersCreate
         \item Unit testing: it is possible to test a deployed function easily, however
             for big projects, where it's necessary to test a lot of functions, this may
             become cumbersome.
-        \item Resource threshold: for projects created with Aws, a single
+        \item Resource threshold: for projects created with AWS, a single
             serverless.yml file may create up to 200 resources, and if exceeded
             the deploy operation fails. Since each function is responsible for the
             creation of about 10 resources, is very easy to exceed this limit.
@@ -354,20 +356,21 @@ $ serverless invoke -f usersCreate
     \end{itemize}
 
     \section{Conclusions}
-    Each cloud model presented has its own strength and drawbacks, depending on the
+    Each cloud model presented has its own strengths and drawbacks, depending on the
     needs of the wanted goal. Favouring as selection criteria, solutions that present
     major advantages in terms of scalability, cost efficiency and speed of development,
-    has been decided to favour the Serverless option.
+    it has been decided to favour the Serverless option.
     The main cloud providers offering this kind of service, as previously stated,
-    are: Aws, with its Lambda service, Microsoft, with Azure Functions, and Google,
+    are: AWS, with its Lambda service, Microsoft, with Azure Functions, and Google,
     with Cloud Functions. Each provider offer different configurations, with different
     pricing, based on memory, CPU, and execution time as parameters, as shown on
     \ref{table:cloud_providers_offer}.
     In the literature there are several documents comparing the various services
     side by side exhaustively \cite{sls_providers_comparison}.
-    For the project subject of this document has been chosen Aws as the main provider,
-    as the most mature platform meeting the project's needs. In particular it
-    providers the following advantages with respect to the competitors \cite{sls_providers_comparison}:
+    For the project, subject of this document, it has been chosen AWS as the main
+    provider, as the most mature platform meeting the project's needs. In particular
+    it providers the following advantages with respect to the competitors
+    \cite{sls_providers_comparison}:
     \begin{itemize}
         \item Cold start (\ref{table:cloud_providers_cold_start})
         \item Overall maturity
