@@ -26,7 +26,7 @@
             already offered by the Serverless framework.
         \item A local Web Interface that allows creating and managing project resources,
             functions, with their associated events and models.
-        \item The creation of a standard unit testing structure for each function,
+        \item The creation of a standard unit testing structure for each function
             and based on the \href{https://www.npmjs.com/package/jest}{jest} library.
         \item A standard validation structure for function's input, based on the
             \href{https://www.npmjs.com/package/yup}{yup} library.
@@ -63,7 +63,7 @@
 
     \section{Core}
     The core package contains the core logic components of the framework, which
-    are: creation and management of resources, code generation based on templates,
+    are: creation and management of resources, code generation based on templates
     and handling of defined functions execution.
     The main resources that can be created are:
     \begin{itemize}
@@ -126,7 +126,7 @@
     local development and it contains the resource definition of all services,
     that will be read from the serverless-offline plugin, as described on
     \ref{sec:local_dev}. Restlessness manages the synchronization between
-    \textit{offline} and other user defined services transparently for the user,
+    \textit{offline} and other user defined services transparently for the user
     and this is one of the task of the \textit{JsonServices} class.
 
     \begin{figure}
@@ -498,7 +498,7 @@ $       POST | http://localhost:4000/dev/users
 
     Being Restlessness a framework for serverless services, the primary resource
     that can be defined are functions and at the moment it is possible to define
-    two type of functions, based on the event that triggers them. They are endpoints,
+    two type of functions, based on the event that triggers them. They are endpoints
     and schedules.
 
     \subsubsection{Endpoints}

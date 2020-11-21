@@ -218,7 +218,7 @@
         \label{fig:sls_resource_scheme}
     \end{figure}
 
-    A service is described by a file, located at the root directory of the project,
+    A service is described by a file, located at the root directory of the project
     and composed in the format \href{https://yaml.org/}{Yaml} or Json.
     Below is a simple serverless.yml file (listing \ref{lst:simple_sls_yml}), it
     defines the service users, which contains just a function, responsible of creating
@@ -323,7 +323,7 @@ $ serverless invoke -f usersCreate
         \item Provider agnostic: the framework aims to be independent from the chosen
             cloud provider, thus avoiding vendor lock-in. In practice this feature is
             not achieved completely, as the configuration file serverless.yml may be
-            different across providers. However, the main structure remains the same,
+            different across providers. However, the main structure remains the same
             and that simplify providers migration.
         \item Simplified development: the CLI commands simplify the development process,
             from the deploy to the testing of the deployed functions.

@@ -48,7 +48,7 @@
     \end{figure}
 
     The Cold start refers exactly to this Init phase and it represents an overhead to the
-    function execution. However, once this phase is completed the function is ready,
+    function execution. However, once this phase is completed the function is ready
     and subsequent invocations will not suffer from it. Then after some times without
     receiving any events, usually in the order of 5 to 20 minutes, the platform performs
     the Shutdown phase, so any following event causes the process to start again from
@@ -95,7 +95,7 @@
     a certain amount of time even after the function has been shutdown.
     This leads to a high number of active connections, which is a problem, not only
     in terms of resources used, since each connection requires memory usage on the
-    database, but also because mongodb has a limit of 500 concurrent connections,
+    database, but also because mongodb has a limit of 500 concurrent connections
     and once the threshold is exceeded the application experiences random errors when
     performing database operations.
     \begin{figure}
