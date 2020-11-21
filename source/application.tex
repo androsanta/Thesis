@@ -48,7 +48,7 @@
     \end{figure}
 
     The Cold start refers exactly to this Init phase and it represents an overhead to the
-    function execution. However once this phase is completed the function is ready,
+    function execution. However, once this phase is completed the function is ready,
     and subsequent invocations will not suffer from it. Then after some times without
     receiving any events, usually in the order of 5 to 20 minutes, the platform performs
     the Shutdown phase, so any following event causes the process to start again from
@@ -83,7 +83,7 @@
     enabled or disable the warmup on the single endpoint, since not all functions may
     need it.
     By including the warmup plugin into the framework the effect of Cold start has
-    been mitigated, however it introduced another type of issue.
+    been mitigated, however, it introduced another type of issue.
 
     \section{Database proxy}
     The project Spazio alla Scuola rely on the popular non relational database
@@ -91,7 +91,7 @@
     run in its own runtime, independently from the others, consequently each function
     requiring database access needs to open a non shared connection.
     So the number of active connections can become quite high, depending on the number
-    of active functions, furthermore using mongodb, the connection remains active for
+    of active functions, furthermore, using mongodb the connection remains active for
     a certain amount of time even after the function has been shutdown.
     This leads to a high number of active connections, which is a problem, not only
     in terms of resources used, since each connection requires memory usage on the

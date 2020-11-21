@@ -175,7 +175,7 @@ export default class ${name} extends MongoBase {
     Another advantage of Serverless is indeed the possibility to invoke a function
     from another one, but this comes at the cost of a doubled Cold start (
     \ref{subsec:cold_start}), resulting in a performance degradation for some requests.
-    However the solution provided on \ref{subsec:cold_start} is particularly useful in
+    However, the solution provided on \ref{subsec:cold_start} is particularly useful in
     this case because enabling the warmup plugin on the proxy function, avoids the
     costs of function initialization and also database connection, making it possible
     to enable warmup only on a small group of functions, so the overall performance

@@ -79,7 +79,7 @@
     \subsection{Platform as a Service (PaaS)}
     This model simplify web development, from a developer perspective, as they can
     rely on the cloud provider for a series of services, which are vendor dependent.
-    However some of them can be defined as core PaaS services and those are: development
+    However, some of them can be defined as core PaaS services and those are: development
     tools, middleware, operating systems, database management and infrastructure.
     PaaS can be accessed over any internet connection, so developers can work on
     the application from anywhere in the world and build it completely on the browser.
@@ -105,13 +105,13 @@
     In this model the abstraction from the underlying infrastructure is maximized.
     The vendor makes available a fully built cloud application to customers, through
     a subscription contract, so rather than purchasing the resource once there is
-    a periodic fee. The main advantages of this model are: access from anywhere,
-    no need for updates or installations, scalability, as it's managed by the SaaS
+    a periodic fee. The main advantages of this model are: access from anywhere;
+    no need for updates or installations; scalability, as it's managed by the SaaS
     provider, cost savings.
-    However there are also main disadvantages, that makes this solution not suitable
+    However, there are also main disadvantages, that makes this solution not suitable
     in some cases: developers have no control over the vendor software, the business
     may become dependent on the SaaS provider (vendor lock-in), no direct control
-    over security, this may be an issue especially for large companies \cite{saas}.
+    over security, which may be an issue especially for large companies \cite{saas}.
 
     \begin{figure}
         \centering
@@ -182,9 +182,10 @@
 
     \section{Serverless Framework}
     \label{sec:serverless_framework}
-    Shortly after the release of the service AWS Lambda functions, has been introduced,
-    in 2015, the Serverless Framework, with the main objective of making development,
-    deploy and troubleshoot of serverless applications with the least possible overhead.
+    Shortly after the release of the service AWS Lambda functions, it has been introduced,
+    in 2015, the Serverless Framework, with the main objective of giving developers
+    the tools for developing, deploying and troubleshooting serverless applications
+    with the least possible overhead.
     The framework consists of an Open Source Command Line Interface and a hosted
     dashboard, that combined provide developers with serverless application lifecycle
     management. Serverless supports all runtime provided by AWS, corresponding to
@@ -322,7 +323,7 @@ $ serverless invoke -f usersCreate
         \item Provider agnostic: the framework aims to be independent from the chosen
             cloud provider, thus avoiding vendor lock-in. In practice this feature is
             not achieved completely, as the configuration file serverless.yml may be
-            different across providers. However the main structure remains the same,
+            different across providers. However, the main structure remains the same,
             and that simplify providers migration.
         \item Simplified development: the CLI commands simplify the development process,
             from the deploy to the testing of the deployed functions.
@@ -338,7 +339,7 @@ $ serverless invoke -f usersCreate
     \begin{itemize}
         \item Compilation of the configuration file may become tedious as the project grows.
         \item The framework is extremely flexible regarding the project structure and
-            that is an advantage, however this can be also a drawback as it's up to the
+            that is an advantage, however, this can be also a drawback as it's up to the
             developer to find a suitable structure and this means less time spent on
             business related tasks.
         \item Unit testing: it is possible to test a deployed function easily, however
@@ -356,10 +357,10 @@ $ serverless invoke -f usersCreate
     \end{itemize}
 
     \section{Conclusions}
-    Each cloud model presented has its own strengths and drawbacks, depending on the
-    needs of the wanted goal. Favouring as selection criteria, solutions that present
-    major advantages in terms of scalability, cost efficiency and speed of development,
-    it has been decided to favour the Serverless option.
+    Each cloud model presented has its own strengths and drawbacks, according to the
+    wanted goal and the specific project's needs. Favouring as selection criteria,
+    solutions that present major advantages in terms of scalability, cost efficiency
+    and speed of development, it has been decided to favour the Serverless option.
     The main cloud providers offering this kind of service, as previously stated,
     are: AWS, with its Lambda service, Microsoft, with Azure Functions and Google,
     with Cloud Functions. Each provider offer different configurations, with different
