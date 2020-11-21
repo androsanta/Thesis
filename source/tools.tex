@@ -8,14 +8,14 @@
 
     \section{JavaScript}
     JavaScript is a lightweight interpreted programming language. Interpreted means
-    that the code is read top to bottom, and the result of the running code is
+    that the code is read top to bottom and the result of the running code is
     immediately returned. Interpreted programming languages are opposed to compiled
     one, where the code is transformed into a binary format that can be directly
     executed \cite{what_is_js}.
     Although JavaScript was born as a language limited to client side programming,
     exploiting an engine directly incorporated into the Web browser, with the
     introduction of Node.js has become possible to use this language also for backend
-    programming, and in general in contexts outside of the browser.
+    programming and in general in contexts outside of the browser.
     Node.js is a JavaScript runtime based on the V8 engine, core engine of the popular
     Chrome browser \cite{node_org}.
     A key characteristic and one of the main strength of JavaScript with respect
@@ -24,7 +24,7 @@
     based on a LIFO queue (Last In, First Out) continuously checked by the so called
     Event Loop.
     As shown on \ref{fig:event_loop}, operations regarding File System, Network or
-    Database access are executed separately, and only once completed are inserted
+    Database access are executed separately and only once completed are inserted
     again into the queue, to handle their result. Meanwhile other queued code
     is executed by the only present thread.
 
@@ -39,7 +39,7 @@
     into concurrency issues.
     This peculiarities make JavaScript well suited for the so called real-time
     applications (RTAs), that is applications that have to process a high volume
-    of short messages requiring low latency, and so they require a highly scalable
+    of short messages requiring low latency and so they require a highly scalable
     solution. Conversely due to its single threaded nature, JavaScript is not
     recommended for CPU-heavy jobs, as the Event Loop would be stuck on a single
     operation \cite{node_event_loop}\cite{node_on_backend}.
@@ -106,7 +106,7 @@ aStudent.graduationYear = 2021      // Valid
             \cite{jsoniso}, that must be present for both modules that are published
             into the registry and modules that use other modules from the registry
             as dependencies. It contains projects informations, such as name and
-            version, and a list of other modules, on which the project depends on.
+            version and a list of other modules, on which the project depends on.
         \item \textit{node\_modules}: an automatically created folder that contains
             all the projects dependencies. At runtime Node.js looks for modules
             in this folder.
@@ -117,7 +117,7 @@ aStudent.graduationYear = 2021      // Valid
     exported using the CommonJs specification. To publish the package on the Npm
     registry is possible to invoke the \textit{publish} command on the \textit{npm}
     CLI. With the \textit{install} command that same package is installed as
-    dependency under the \textit{node\_modules} folder, and can be used as shown
+    dependency under the \textit{node\_modules} folder and can be used as shown
     on listing \ref{lst:add_require}
 
     \bigskip
@@ -166,7 +166,7 @@ const add = require('./add.js')
             a history of all changes.
         \item Distributed: Git is based on remote and local repositories, the first
             one stored in a server, while the latter is stored in the developer
-            computer, and both contains the full history information.
+            computer and both contains the full history information.
     \end{itemize}
 
     Git is useful to track code changes in all cases, but it's absolutely necessary
@@ -195,7 +195,7 @@ const add = require('./add.js')
     others, integrating it only when it reaches an appropriate stability level.
     The strategy adopted with the developed framework has been to create branches
     with the \textit{feature/} prefix for new functionalities or improvement of
-    existing ones, and the \textit{fix/} prefix for correction of bugs, followed
+    existing ones and the \textit{fix/} prefix for correction of bugs, followed
     by the name of the specific feature of fix.
 
     \subsection{Github features}
@@ -206,14 +206,14 @@ const add = require('./add.js')
     \subsubsection{Issues}
     Issues are Github feature that helps to keep track of tasks, bugs, enhancements
     or any kind of modification to the project. They are characterized by a title,
-    that gives an immediate feedback about what is the reason of the Issue, and an
+    that gives an immediate feedback about what is the reason of the Issue and an
     optional description, with more specific and technical information, as shown
     on figure \ref{fig:rln_issue}. Each Issue can be assigned to one or more
     collaborators, responsible for having it solved. This tracking system is focused
     on collaboration, as it is possible to comment and discuss about the Issue with
     other collaborators, also referencing other resources, which can be other Issues
     or code sections.
-    As the project grows so does the number of Issues, and so it becomes important to
+    As the project grows so does the number of Issues and so it becomes important to
     keep them organized. This is made possible by using Labels and Milestones.
     Both allow to group Issues according to a common characteristic, but with a
     different granularity \cite{github_issues}.
@@ -262,8 +262,8 @@ const add = require('./add.js')
     commenting on code or requesting modification on the proposed changes, as it
     happens for Issues.
     When a Pull Request is created the author chooses a target branch on which to
-    integrate its proposed changes, and once the request is accepted those changes
-    are merged into the target branch, and the Pull Request is considered closed,
+    integrate its proposed changes and once the request is accepted those changes
+    are merged into the target branch and the Pull Request is considered closed,
     as shown on figure \ref{fig:rln_pull_request}.
 
     \begin{figure}
@@ -324,7 +324,7 @@ const add = require('./add.js')
     \subsection{The platform}
     CircleCi is an online platform that provides services for implementing
     Continuous Integration and Continuous Delivery (CI/CD) on software projects.
-    It can be configured to access the source code repository on Github, and after
+    It can be configured to access the source code repository on Github and after
     that each commit can trigger an automated build, test and deploy task.
     Those automated tasks are performed inside a clean container or Virtual Machine,
     ensuring a reproducible environment.
@@ -341,7 +341,7 @@ const add = require('./add.js')
     \begin{itemize}
         \item Configuration: All processes are orchestrated through a single file
             called \mbox{\textit{config.yml}}, in the \href{https://yaml.org/}{Yaml}
-            format, and placed under a folder called \textit{.circleci} at the root
+            format and placed under a folder called \textit{.circleci} at the root
             of the project.
         \item Orbs: Reusable snippets of code that help automate repeated processes
         \item Jobs: Building blocks of the configuration file, they are a collection
@@ -352,7 +352,7 @@ const add = require('./add.js')
             containers, Virtual Machines running Linux, Windows or MacOS.
         \item Steps: Actions that need to be taken to complete a Job. It can be
             any kind of executable command.
-        \item Workflows: They define a list of Jobs with their run order, and
+        \item Workflows: They define a list of Jobs with their run order and
             concurrency.
     \end{itemize}
 
@@ -373,7 +373,7 @@ executors:
     necessary to define multiple Workflows, one for each package. Each Workflow
     defines two parallel Jobs, for testing and publishing on the Npm registry.
     Figure \ref{fig:ci_workflow_diagram} show the described structure for two Restlessness
-    packages, and it is possible to notice that each Job run in its own container,
+    packages and it is possible to notice that each Job run in its own container,
     in parallel and independently from the others
 
     \begin{figure}
@@ -404,7 +404,7 @@ executors:
     execution, errors and details of every operation, it offers also a Github plugin,
     that is able to show Workflows result directly on commits or Pull Requests, as
     shown on \ref{fig:ci_github_integration}. The integration between the two
-    services has simplified the development workflow of Restlessness, and it adds to
+    services has simplified the development workflow of Restlessness and it adds to
     the already described advantages of adopting a CI/CD approach.
 
 
@@ -436,7 +436,7 @@ executors:
         \item CloudFormation: A service that allow to model infrastructure as code.
             Each CloudFormation configuration corresponds to a resource called
             CloudFormation Stack, containing the description of other resources,
-            such as AWS Lambda functions, API Gateway, and how such resources may
+            such as AWS Lambda functions, API Gateway and how such resources may
             interact.
         \item CloudWatch: A services for monitoring and observability.
         \item IAM:Acronym for Identity and Access Management, enables the management
@@ -463,7 +463,7 @@ executors:
     \label{subsec:lambda_invocation}
 
     Figure \ref{fig:simple_lambda} shows the simplest possible case of execution
-    flow of an http request, handled by an API Gateway, and forwarded to the Lambda
+    flow of an http request, handled by an API Gateway and forwarded to the Lambda
     function mapped to the user specified endpoint path.
 
     \begin{figure}
@@ -494,7 +494,7 @@ executors:
     The API Gateway forward the request to the specified Lambda Authorizer, that
     checks the caller's identity and generates an Authentication Policy, which is
     an object that states which resources the user is authorized to access.
-    The Policy is then cached to improve performance on subsequent requests, and
+    The Policy is then cached to improve performance on subsequent requests and
     if it the access request is granted, the flow proceed as in the previously
     described case.
 
@@ -528,7 +528,7 @@ functions:
 
     React is an Open Source JavaScript library that implements the concept of
     virtual DOM (Document Object Model) \cite{dom_standard}. The browser creates
-    a DOM object at page loading, and then each Html object inside the DOM can be
+    a DOM object at page loading and then each Html object inside the DOM can be
     manipulated using JavaScript functions, giving the user an immediate feedback.
     React instead adopt a different approach by creating a virtual DOM alongside
     the real one. The virtual DOM is not directly synched with the real one, so
@@ -537,9 +537,9 @@ functions:
     the new istance of the virtual DOM is compared to the previous one, allowing
     to reflect the update on the real DOM only for the elements that actually
     change. The library allows to create a structure based on reusable component,
-    obtaining a scalable structure, and is particularly suited for SPA (Single
+    obtaining a scalable structure and is particularly suited for SPA (Single
     Page Applications) \cite{react_js}.
-    The library also introduced a new syntax, named JSX (JavaScript XML), and
+    The library also introduced a new syntax, named JSX (JavaScript XML) and
     listing \ref{lst:react_example} show the definition of a React component.
 
     \bigskip

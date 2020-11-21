@@ -25,13 +25,13 @@
             language, with a standard structure and based on the functionalities
             already offered by the Serverless framework.
         \item A local Web Interface that allows creating and managing project resources,
-            functions, with their associated events, and models.
+            functions, with their associated events and models.
         \item The creation of a standard unit testing structure for each function,
             and based on the \href{https://www.npmjs.com/package/jest}{jest} library.
         \item A standard validation structure for function's input, based on the
             \href{https://www.npmjs.com/package/yup}{yup} library.
         \item Deploy of multiple services with a single CLI command, to deal with
-            the resource threshold limitation of Aws, and to manage and structure
+            the resource threshold limitation of Aws and to manage and structure
             the created project following a micro services approach.
         \item Possibility to extends the framework functionalities.
     \end{itemize}
@@ -47,7 +47,7 @@
             available as \mbox{\textit{@restlessness/core}} package on npm.
         \item Command Line Interface: together with the Web Interface, this is the
             main component with which users interact the most. It depends on the
-            core package to provide its functionalities, and it is available as
+            core package to provide its functionalities and it is available as
             the \mbox{\textit{@restlessness/cli}} package on npm.
         \item Restlessness backend: api service running locally, created with the
             Restlessness framework itself. It is used by the Web Interface to
@@ -85,7 +85,7 @@
 
     The framework allows the creation of those resources and needs to save that
     information to be able to remember the project state, so it creates a series
-    of configuration files, one for each resource type, and store them under the
+    of configuration files, one for each resource type and store them under the
     \textit{config/} directory, in JSON format \cite{json_iso}.
     It has been decided to format all configuration files across the project using JSON,
     preferring it to alternatives, such as Yaml, to simplify their handling and modification
@@ -111,19 +111,19 @@
     a time associated to the same application or project, due to a platform limitation,
     as described on \ref{subsec:application_micro_services}.
     The structure adopted by the framework is to save the configuration file of
-    each service under the \textit{serverless-services} folder, and to provide by
+    each service under the \textit{serverless-services} folder and to provide by
     default two services, as shown on figure \ref{fig:sls_services_dir}.
     The first service is called \textit{shared} and is reserved for the definition
     of resources that are common across the entire application, avoiding duplicates.
-    Any AWS resource can be shared, and there is one in particular that's important
+    Any AWS resource can be shared and there is one in particular that's important
     to share, the API Gateway. Indeed as shown on \ref{subsec:lambda_invocation}
-    Serverless automatically creates a gateway, and so an api address, for each
-    service, and this can become cumbersome when dealing with more than one service.
+    Serverless automatically creates a gateway and so an api address, for each
+    service and this can become cumbersome when dealing with more than one service.
     Figure \ref{fig:api_gateway_multiple_services} shows that sharing the API
     Gateway results in the user having to interact with a single endpoint.
     Other shared resources may be simple functions or authorizers.
     The other framework defined service, named \textit{offline}, is required for
-    local development, and it contains the resource definition of all services,
+    local development and it contains the resource definition of all services,
     that will be read from the serverless-offline plugin, as described on
     \ref{sec:local_dev}. Restlessness manages the synchronization between
     \textit{offline} and other user defined services transparently for the user,
@@ -166,7 +166,7 @@
     storing environment variables.
     When a project is created the framework generates 4 different environments: locale,
     test, staging and production. Each environment has an associated type and stage,
-    with the first representing the purpose of that environment, and the latter the
+    with the first representing the purpose of that environment and the latter the
     corresponding Serverless stage. Below are the available types:
     \begin{itemize}
         \item test: environments used only for testing, which can happen locally
@@ -190,7 +190,7 @@ key2=sample ${key1}
 
     \noindent
     Each environment is then stored under the \mbox{\textit{envs/}} directory, in
-    the form \mbox{\textit{.env.<name>}}, and the interaction with those files is
+    the form \mbox{\textit{.env.<name>}} and the interaction with those files is
     handled by the \textit{EnvFile} class. The load and expansion operation is
     performed differently depending on the operation, local development or deploy.
     During local development it is the dev command that load the environment specified
@@ -335,7 +335,7 @@ $ restlessness deploy --env production users
     why the deploy command, under the hood, takes care of performing this check,
     with a method from the \textit{JsonServices} class, named \textit{healthCheck}.
     In particular, it checks that the various services belong to the same serverless
-    organization and organization, the same AWS deploy region, and that do not exist
+    organization and organization, the same AWS deploy region and that do not exist
     services with functions associated to the same path. The latter is due to the fact
     that the services use a shared api gateway.
 
@@ -355,7 +355,7 @@ $ restlessness deploy --env production users
     already described, which are: Endpoints, Schedules, Authorizers, Daos, Envs,
     Models and Services.
     For each resource it has been created a corresponding Model, to map the information
-    received from the core package into the format expected by the frontend, and
+    received from the core package into the format expected by the frontend and
     vice versa. All Models inherit basic functionalities from a base class named
     \textit{BaseModel} (\ref{fig:base_model_class}), with utility methods for
     accessing data and the unimplemented methods \textit{toConfigEntry} and
@@ -381,7 +381,7 @@ $ restlessness deploy --env production users
     The Restlessness frontend provides a simple interface to interact with the
     framework. Once opened a dashboard provides some project's information and
     links to pages for each resource, where it is possible to view the current
-    resources create, and modify them.
+    resources create and modify them.
     Figure \ref{fig:frontend_site_map} shows the site map of the frontend.
 
     \begin{figure}
@@ -396,7 +396,7 @@ $ restlessness deploy --env production users
 
     The Restlessness CLI is available for installation on the npm platform. Once
     installed, the first step toward using the framework is the creation of a new
-    project, and that is possible using the \textit{new} command, as shown
+    project and that is possible using the \textit{new} command, as shown
     on listing \ref{lst:rln_command_new}.
 
     \bigskip
@@ -460,7 +460,7 @@ $ restlessness new rln_project
     is present the \textit{serverless-services/} directory with the default services
     \textit{shared} and \textit{offline}.
     Other created files are: configuration files, under the \textit{config} folder,
-    environment files, source code, under the src folder, and a .restlessness.json
+    environment files, source code, under the src folder and a .restlessness.json
     file, used to store project related information needed by the framework.
 
     \subsection{Local development}
@@ -481,9 +481,9 @@ $       POST | http://localhost:4000/dev/users
     \end{code}
 
     \subsection{Resource creation}
-    The Web Interface looks like in the figure \ref{fig:rln_web_interface}, and
+    The Web Interface looks like in the figure \ref{fig:rln_web_interface} and
     provides some project details, such as serverless organization, application
-    (section \ref{sec:serverless_framework}), and finally the aws data center
+    (section \ref{sec:serverless_framework}) and finally the aws data center
     region to which the project will be deployed.
     The main functionalities are then available through some shortcuts, that allow
     creating and consulting resources, such as endpoints, schedules, services and
@@ -497,7 +497,7 @@ $       POST | http://localhost:4000/dev/users
     \end{figure}
 
     Being Restlessness a framework for serverless services, the primary resource
-    that can be defined are functions, and at the moment it is possible to define
+    that can be defined are functions and at the moment it is possible to define
     two type of functions, based on the event that triggers them. They are endpoints,
     and schedules.
 
@@ -525,7 +525,7 @@ $       POST | http://localhost:4000/dev/users
     \end{figure}
 
     During the endpoint creation, the framework takes care of saving the provided
-    information on the configuration file \textit{config/endpoints.json}, and to
+    information on the configuration file \textit{config/endpoints.json} and to
     create code template for the development of the corresponding function.
     As shown on figure \ref{fig:new_endpoint_folder_structure}, it has been created a
     folder under src/endpoints, using the notation http method plus normalized value
@@ -623,7 +623,7 @@ export interface Request extends
     Schedules are serverless functions that are triggered by a programmed event.
     By creating a Schedule from the Web Interface the framework creates the necessary
     template files under \textit{src/schedules} as shown on
-    \ref{fig:new_schedule_folder_structure}, and also saves the provided information
+    \ref{fig:new_schedule_folder_structure} and also saves the provided information
     under the \textit{config/schedules.json} file.
 
     \begin{figure}
@@ -661,7 +661,7 @@ export default ScheduleHandler.bind(this, handler, 'clean');
     \end{code}
 
     \subsection{Test}
-    A test template is also provided when creating a new endpoint, and it is based
+    A test template is also provided when creating a new endpoint and it is based
     on the popular unit testing library \href{https://jestjs.io/}{jest}, in
     conjunction with the TestHandler class provided by Restlessness.
 

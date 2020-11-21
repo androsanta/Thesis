@@ -2,10 +2,10 @@
     \label{chap:application}
 
     During its development process, the Restlessness framework has been tested on
-    real deployed applications, and this has been fundamental as it helped finding
+    real deployed applications and this has been fundamental as it helped finding
     bugs and critical issues at an early stage.
     The main issues have emerged during the implementation of the backend for the
-    project Spazio alla scuola, a platform thought by the Fondazione Agnelli.
+    project Spazio alla Scuola, a platform thought by the Fondazione Agnelli.
 
     The foundation is a non-profit, independent institute for social science research,
     born in 1966 in Turin, by the lawyer Agnelli, on the occasion of the centenary
@@ -13,7 +13,7 @@
     Its purpose is to work in support of scientific research and to disseminate
     knowledge of the conditions on which Italy's progress depends.
 
-    The project Spazio alla scuola aims to provide a concrete support to school
+    The project Spazio alla Scuola aims to provide a concrete support to school
     leaders for lecture resumption on September 2020, given the health situation on the
     country due to the SARS-CoV-2 pandemic.
     The platform offers tools to verify capacity of classroom and other school spaces,
@@ -65,7 +65,7 @@
         \label{fig:cold_start_duration}
     \end{figure}
 
-    In the particular case of the project Spazio alla scuola the Cold start duration
+    In the particular case of the project Spazio alla Scuola the Cold start duration
     was experienced to be in the order of 1.5s, caused mainly from: mongodb
     initialization and connection (about 500ms) and third party libraries (about 400ms)
     and Restlessness overhead (about 50ms).
@@ -86,7 +86,7 @@
     been mitigated, however it introduced another type of issue.
 
     \section{Database proxy}
-    The project Spazio alla scuola rely on the popular non relational database
+    The project Spazio alla Scuola rely on the popular non relational database
     \href{https://www.mongodb.com}{mongodb}. As stated previously, each function
     run in its own runtime, independently from the others, consequently each function
     requiring database access needs to open a non shared connection.
@@ -128,7 +128,7 @@
     are created for each function, to provides services such as logging, API Gateway
     for http events, permissions and others functionalities. The AWS platform has a
     threshold of maximum 200 resources definable for each service
-    (\ref{subsec:sls_disadvantage}), and since for each function there are about 10
+    (\ref{subsec:sls_disadvantage}) and since for each function there are about 10
     resources associated, it follows that each service can define about 20 functions.
     Since the serverless paradigm proposes a Micro services oriented approach this
     limitation actually force developers to compose their application as a set of
@@ -136,12 +136,12 @@
     So the next step in the Restlessness framework development has been to switch
     between the management of a single service, to a multitude of services, under
     the same Restlessness project. With this approach it has been possible to split
-    the functions of the project Spazio alla scuola into multiple services, obtaining
+    the functions of the project Spazio alla Scuola into multiple services, obtaining
     a more fine grained separation between its logic components.
 
     \bigbreak
     In conclusion the choice of using serverless, combined with the Restlessness
-    framework for the backend api of Spazio alla scuola, brought the desired benefits
+    framework for the backend api of Spazio alla Scuola, brought the desired benefits
     in terms of ease of development, after the proper framework improvements described
     previously. At its peak, the api service has managed 500 thousand requests,
     demonstrating the advantage of the natural scalability of the serverless approach.

@@ -30,12 +30,12 @@
     which are:
     \begin{itemize}
         \item Header: It typically consists of two parts: the type of token, which
-            is \textit{JWT}, and the signing algorithm used. The JSON object
+            is \textit{JWT} and the signing algorithm used. The JSON object
             containing those keys is then Base64url encoded, creating the first
             part of the token.
         \item Payload: It contains the claims, which are statements about an entity,
             which usually is the user, plus any additional data. Also this JSON
-            object is then Base64url encoded, and it forms the second part of the token.
+            object is then Base64url encoded and it forms the second part of the token.
         \item Signature: The third part is the signature obtained by signing the
             already created parts (Header and Payload separated by a dot) with a
             secret.
@@ -61,7 +61,7 @@ $ restlessness add-auth @restlessness/auth-jwt
 
     \paragraph{Model creation}
     Once installed, the package automatically creates a model class, named
-    \textit{JwtSession}, based on the template defined by the package, and it can
+    \textit{JwtSession}, based on the template defined by the package and it can
     then be extended as needed (\ref{lst:new_model_auth}).
 
     \bigskip
@@ -118,17 +118,17 @@ abstract class DaoPackage extends AddOnPackage {
     \end{code}
 
     In addition to the previously defined hooks, classes implementing DaoPackage,
-    should implement also the modelTemplate method, and a base dao class, to which
+    should implement also the modelTemplate method and a base dao class, to which
     we will refer to as DaoBase. This latter class should provides the main Dao
     functionalities, while the code template returned by modelTemplate should define
     a class that extends the DaoBase one.
 
     \subsection{Dao for mongodb}
     Restlessness already provides a Dao package for the popular non relational
-    database \href{https://www.mongodb.com/}{mongodb}, and it's available on the
+    database \href{https://www.mongodb.com/}{mongodb} and it's available on the
     npm platform as \mbox{\textit{@restlessness/dao-mongo}}.
     That package exports two main components: an implementation of the DaoPackage
-    class, and a MongoBase class, the base class containing the main Dao
+    class and a MongoBase class, the base class containing the main Dao
     functionalities for CRUD operations, as shown on listing \ref{fig:mongobase}.
 
     \begin{figure}

@@ -6,7 +6,7 @@
     a cumbersome process to undertake, especially for small businesses
     \cite{what_is_sls_cloudflare}.
     Then came a new paradigm for the provisioning of computing infrastructure, named
-    Cloud Computing, and defined as:
+    Cloud Computing and defined as:
 
     \enquote*{%
         Clouds are a large pool of easily usable and accessible virtualized resources
@@ -68,7 +68,7 @@
     to own and manage the physical infrastructure, so they can build and host web
     applications, store data or perform any kind of computing with a lot more flexibility.
     An advantage of this approach is scalability, as customers can add new servers
-    on demand, every time the business needs to scale up, and the same apply also
+    on demand, every time the business needs to scale up and the same apply also
     if the resources are not needed anymore. Essentially physical servers purchasing,
     installing, maintenance and updating operations are outsourced to the cloud
     provider, so customers can spend fewer resources on that and focus more on business
@@ -79,8 +79,8 @@
     \subsection{Platform as a Service (PaaS)}
     This model simplify web development, from a developer perspective, as they can
     rely on the cloud provider for a series of services, which are vendor dependent.
-    However some of them can be defined as core PaaS services, and those are: development
-    tools, middleware, operating systems, database management, and infrastructure.
+    However some of them can be defined as core PaaS services and those are: development
+    tools, middleware, operating systems, database management and infrastructure.
     PaaS can be accessed over any internet connection, so developers can work on
     the application from anywhere in the world and build it completely on the browser.
     This kind of simplification comes at the cost of less control over the development
@@ -90,9 +90,9 @@
     \smallskip
     Another model has recently been added to the three main cloud computing models,
     named Backend as a Service (Baas). This model stands, with some differences,
-    at the same level of PaaS, and it's suited especially for web and mobile backend
+    at the same level of PaaS and it's suited especially for web and mobile backend
     development. As with PaaS, BaaS also makes the underlying server infrastructure
-    transparent from the developer point of view, and also provides the latter with
+    transparent from the developer point of view and also provides the latter with
     api and sdk that allow the integration of the required backend functionalities.
     The main functionalities already implemented by BaaS are: database management,
     cloud storage, user authentication, push notifications, remote updating and hosting.
@@ -147,7 +147,7 @@
     \end{figure}
 
     Being the underlying infrastructure transparent for the developer, you get the advantage
-    of a simpler software development process, and this advantage characterize also
+    of a simpler software development process and this advantage characterize also
     the PaaS model. Furthermore, being the service auto-scaling, is possible to obtain
     a virtually unlimited scaling capacity, as it happens in the IaaS model, where the
     limit is the cloud provider availability.
@@ -156,7 +156,7 @@
     as a Service (FaaS), which allows developers to write and update pieces of code
     on the fly, typically a single function.
     Such code is then executed in response to an event, usually an api call, but other
-    options are possible, and with more events, more functions are execture. Instead,
+    options are possible and with more events, more functions are execture. Instead,
     in absence of events, no code is executed thus leading to the previously described
     benefit regarding scalability and cost effectiveness.
     Furthermore, through this model turns out to be more efficient to implement web
@@ -173,7 +173,7 @@
 
     So the main advantages of the FaaS model are: improved developer speed, built-in
     scalability and cost efficiency. As each approach, there are also drawbacks, in
-    this case developers have less control on the system, and an increased complexity when it
+    this case developers have less control on the system and an increased complexity when it
     comes to test the application in a local environment.
 
     The first cloud provider to move into the FaaS direction has been Amazon, with
@@ -189,14 +189,14 @@
     dashboard, that combined provide developers with serverless application lifecycle
     management. Serverless supports all runtime provided by AWS, corresponding to
     the most popular programming languages such as: Node.js, Python, Ruby, Java,
-    Go, .Net, and with others on development.
+    Go, .Net and with others on development.
 
     Although the Serverless Framework, given the number of cloud providers supported,
     aim to be platform agnostic, the following examples will be based on the AWS
     provider and on the Node.js programming language.
 
     The main work units of the framework, according to the FaaS model, are the functions.
-    Each function is responsible for a single job, and although is possible to perform
+    Each function is responsible for a single job and although is possible to perform
     multiple tasks using a single function, it's not recommended as stated by the
     design principle Separation of concerns \cite{separation_of_concerns}.
     Each function is executed only when triggered by an Event, which can be of different
@@ -339,13 +339,13 @@ $ serverless invoke -f usersCreate
         \item Compilation of the configuration file may become tedious as the project grows.
         \item The framework is extremely flexible regarding the project structure and
             that is an advantage, however this can be also a drawback as it's up to the
-            developer to find a suitable structure, and this means less time spent on
+            developer to find a suitable structure and this means less time spent on
             business related tasks.
         \item Unit testing: it is possible to test a deployed function easily, however
             for big projects, where it's necessary to test a lot of functions, this may
             become cumbersome.
         \item Resource threshold: for projects created with AWS, a single
-            serverless.yml file may create up to 200 resources, and if exceeded
+            serverless.yml file may create up to 200 resources and if exceeded
             the deploy operation fails. Since each function is responsible for the
             creation of about 10 resources, is very easy to exceed this limit.
             The only solution so solve this problem is to split the functions across
@@ -361,9 +361,9 @@ $ serverless invoke -f usersCreate
     major advantages in terms of scalability, cost efficiency and speed of development,
     it has been decided to favour the Serverless option.
     The main cloud providers offering this kind of service, as previously stated,
-    are: AWS, with its Lambda service, Microsoft, with Azure Functions, and Google,
+    are: AWS, with its Lambda service, Microsoft, with Azure Functions and Google,
     with Cloud Functions. Each provider offer different configurations, with different
-    pricing, based on memory, CPU, and execution time as parameters, as shown on
+    pricing, based on memory, CPU and execution time as parameters, as shown on
     \ref{table:cloud_providers_offer}.
     In the literature there are several documents comparing the various services
     side by side exhaustively \cite{sls_providers_comparison}.
@@ -394,7 +394,7 @@ $ serverless invoke -f usersCreate
             \hline
             CPU & Proportional to Memory & Unknown & Proportional to Memory \\
             \hline
-            Language & Python Nodejs Java, and others & Nodejs Python, and others & Nodejs \\
+            Language & Python Nodejs Java and others & Nodejs Python and others & Nodejs \\
             \hline
             Runtime OS & Amazon Linux & Windows 10 & Debian 8 \\
             \hline
