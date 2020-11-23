@@ -31,18 +31,28 @@ and more towards a micro services oriented approach, moving away from monolithic
 structures.
 The maximum representation of this is with the serverless paradigm, which has
 found an implementation in the cloud model Function as a Service (FaaS), a model
-that uses plain simple functions as its main resources. 
-% This statement may not be true, from my understanding that, even the traditional framework are MVC-based, separating Model Visual Control components and usually event-driven, though an event-loop is always running, I suspect that FaaS will anyway have a listener running also
-The execution model of traditional servers implies that the application's code is always running, to be ready to serve incoming http(s) requests (internet requests). 
-The FaaS model differs
-from the latter as each function is executed only in response to an event, obtaining
-a fine grained usage of the physical infrastructure. 
-In the context of Web
-Applications an event could be a network event (e.g. http requests), a timer event (either one-shot or interval) or other customized trigger event.
-% This part you need to refine, I tried to modify a little bit, it is better for you to go through again
-The main advantages of this model are: 1) fast development and deployment as infrastructure becomes transparent to developers and logic is now implemented in modularized functions; 2) easy to scale based on the server load by changing number of function instances; 3)
-cost effective as only function execution is billed, opposing to the traditional
+that uses plain simple functions as its main resources.
+The provisioning model of traditional servers is based on renting server space, which
+is generally over-purchased, to ensure handling spikes in the number of incoming
+http(s) requests (internet requests).
+The FaaS model differs from the latter as each function is executed and billed
+only in response to an event, obtaining a fine grained usage of the physical
+infrastructure and paying on an as-used basis.
+In the context of Web Applications an event could be a network event (e.g. http
+requests), a timer event (either one-shot or interval) or other customized trigger
+event.
+The main advantages of this model are:
+1) Simplified development and deployment process. The first one is due to the fact that
+the code is splitted into simple independent functions, each one with a defined purpose.
+The latter is improved because each function can be deployed singularly, cutting
+the time needed to provide fixes for bugs and critical issues.
+2) The service is auto-scaling, so based on the server load (e.g. the number of
+received internet requests) the cloud provider takes care of creating new instances
+of the required functions.
+3) Cost effective as only function execution is billed, opposing to the traditional
 approach where also idle time is included in the cost.
+
+\noindent
 Serverless Framework has emerged as one of the major framework that allows the
 usage of the homonym paradigm in a simple way.
 Despite the functionalities introduced by Serverless, the developer must take
