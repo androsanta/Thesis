@@ -7,5 +7,25 @@
     "daoIds": [],
     "warmupEnabled": true,
     "serviceName": "users"
+  },
+  {
+    "id": "deleteUsers",
+    "safeFunctionName": "deleteUsers",
+    "route": "/users",
+    "method": "delete",
+    "authorizerId": null,
+    "daoIds": null,
+    "warmupEnabled": false,
+    "serviceName": "users"
+  },
+  {
+    "id": "getUsersById",
+    "safeFunctionName": "getUsersById",
+    "route": "/users/{id}",
+    "method": "get",
+    "authorizerId": null,
+    "daoIds": null,
+    "warmupEnabled": false,
+    "serviceName": "users"
   }
 ]

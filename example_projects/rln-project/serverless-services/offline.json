@@ -43,12 +43,45 @@
       "events": [
         {
           "schedule": {
+            "rate": "rate(1 day)",
             "name": "clean",
             "description": "",
             "enabled": true
           }
         }
       ]
+    },
+    "deleteUsers": {
+      "handler": "dist/exporter.deleteUsers",
+      "events": [
+        {
+          "http": {
+            "path": "users",
+            "method": "delete",
+            "cors": true,
+            "authorizer": null
+          }
+        }
+      ],
+      "warmup": {
+        "enabled": false
+      }
+    },
+    "getUsersById": {
+      "handler": "dist/exporter.getUsersById",
+      "events": [
+        {
+          "http": {
+            "path": "users/{id}",
+            "method": "get",
+            "cors": true,
+            "authorizer": null
+          }
+        }
+      ],
+      "warmup": {
+        "enabled": false
+      }
     }
   },
   "custom": {
